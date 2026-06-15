@@ -116,14 +116,22 @@ export default function CampusLife() {
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Culture &amp; Social Impact</h2>
               <div className="space-y-8">
                 <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start text-center sm:text-left">
-                  <div className="mt-1 flex justify-center sm:justify-start"><Music className="w-6 h-6 text-primary" /></div>
+                  <div className="mt-1 flex justify-center sm:justify-start">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Music className="w-7 h-7 text-primary" />
+                    </div>
+                  </div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">Traditional Choir &amp; Debate</h4>
                     <p className="text-foreground/70 leading-relaxed">Our award-winning traditional choir preserves our rich Xhosa heritage, while our debate teams compete fiercely in regional symposiums, developing articulate future leaders.</p>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start text-center sm:text-left">
-                  <div className="mt-1 flex justify-center sm:justify-start"><Globe className="w-6 h-6 text-primary" /></div>
+                  <div className="mt-1 flex justify-center sm:justify-start">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Globe className="w-7 h-7 text-primary" />
+                    </div>
+                  </div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">Agricultural Science Outreach</h4>
                     <p className="text-foreground/70 leading-relaxed">Learners engage hands-on with soil science and sustainable farming, connecting academic learning to real environmental stewardship in our local communities of Mgqukhwebe and Agnes Rest.</p>
