@@ -32,23 +32,6 @@ export default function Admissions() {
         </div>
       </section>
 
-      {/* No-Fee Notice Banner */}
-      <div className="bg-gradient-to-r from-accent via-red-700 to-accent py-6 border-y-4 border-primary shadow-2xl relative z-20 -mt-8 mx-4 md:mx-auto max-w-5xl rounded-lg">
-        <div className="px-6 text-center">
-          <h2 className="text-xl md:text-2xl font-bold text-white uppercase tracking-wider flex items-center justify-center gap-3 flex-wrap">
-            <ShieldCheck className="w-8 h-8 text-primary" />
-            Quintile 2 No-Fee School
-            <ShieldCheck className="w-8 h-8 text-primary" />
-          </h2>
-          <p className="text-white/90 mt-2 font-medium max-w-2xl mx-auto">
-            Zero Tuition Required. Quality education is fully funded by the Department of Basic Education for all admitted learners.
-          </p>
-          <p className="text-white/80 mt-3 text-sm max-w-2xl mx-auto">
-            As a Quintile 2 school, Ntsonkotha is eligible to receive up to <span className="font-bold text-primary">R1,602 per learner</span> from the Department of Education to cover operational expenses and educational resources — ensuring every learner has access to quality teaching materials and facilities.
-          </p>
-        </div>
-      </div>
-
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">

@@ -122,9 +122,6 @@ export default function About() {
             <img src={gallery3} alt="Community Group" className="w-full h-72 object-cover rounded-lg shadow-xl" />
             <div className="relative">
               <img src={awardsImg} alt="School and Teacher Awards Ceremony" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-lg p-3">
-                <p className="text-xs font-bold text-primary uppercase tracking-wider">Awards Ceremony</p>
-              </div>
             </div>
           </div>
         </div>

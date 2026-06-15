@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Globe, Music, Trophy } from "lucide-react";
 
-import heroImg from "@assets/ntsonkota-secondary-school_1779883577718.jpg";
 import summerImg from "@assets/unnamed_(9)_1779883577723.webp";
 import agriImg from "@assets/lab_agriculture_soil.jpg";
 import rugbyImg from "@assets/rugby_team.jpg";
@@ -28,7 +27,7 @@ export default function CampusLife() {
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={heroImg} 
+            src="/Campus Life.jpeg" 
             alt="Students on outing" 
             className="w-full h-full object-cover"
           />
@@ -155,7 +154,12 @@ export default function CampusLife() {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src={awards2Img} alt="Staff receiving award with trophy and certificate" className="w-full h-80 md:h-[28rem] object-cover object-bottom" />
+              <img
+                src={awards2Img}
+                alt="Staff receiving award with trophy and certificate"
+                className="w-full h-80 md:h-[28rem] object-cover"
+                style={{ objectPosition: "center 15%" }}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5 flex items-center gap-3">
                 <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
