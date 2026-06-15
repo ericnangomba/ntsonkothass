@@ -1,6 +1,6 @@
 [build]
   command = "pnpm install --frozen-lockfile && pnpm --filter @workspace/ntsonkotha-website run build"
-  publish = "./artifacts/ntsonkotha-website/dist"
+  publish = "artifacts/ntsonkotha-website/dist"
 
 [build.environment]
   NODE_VERSION = "22"
