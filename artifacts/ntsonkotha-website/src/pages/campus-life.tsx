@@ -6,13 +6,9 @@ import summerImg from "@assets/unnamed_(9)_1779883577723.webp";
 import agriImg from "@assets/lab_agriculture_soil.jpg";
 import rugbyImg from "@assets/rugby_team.jpg";
 import soccerFormalImg from "@assets/soccer_team_formal.jpg";
-import soccerSquadImg from "@assets/soccer_team_squad.jpg";
-import soccerHuddleImg from "@assets/soccer_team_huddle.jpg";
 import netballImg from "@assets/netball_team.jpg";
 import athleticsImg from "@assets/athletics_team.jpg";
-import awards1Img from "@assets/awards1_1779888923524.jpeg";
 import awards2Img from "@assets/awards_staff_ceremony2.jpg";
-import awardsTrophiesImg from "@assets/awards_trophies_table.jpg";
 import awardsCertsImg from "@assets/awards_teachers_certificates.jpg";
 import gallery1 from "@assets/unnamed_(7)_1779883577722.jpg";
 import gallery2 from "@assets/unnamed_1779883577724.webp";
@@ -86,7 +82,7 @@ export default function CampusLife() {
           </div>
 
           {/* 2×2 Sport Photo Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {sports.map((sport) => (
               <div key={sport.name} className="relative overflow-hidden rounded-xl shadow-2xl group aspect-video">
                 <img
@@ -101,26 +97,6 @@ export default function CampusLife() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Soccer Away Day Feature */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative overflow-hidden rounded-xl shadow-xl group">
-              <img src={soccerSquadImg} alt="Soccer squad with school bus" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-5">
-                <p className="text-white font-bold text-base">Full Squad · Away Day</p>
-                <p className="text-foreground/70 text-sm">Per Ardua Ad Astra</p>
-              </div>
-            </div>
-            <div className="relative overflow-hidden rounded-xl shadow-xl group">
-              <img src={soccerHuddleImg} alt="Soccer team huddle before match" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-5">
-                <p className="text-white font-bold text-base">Pre-Match Huddle</p>
-                <p className="text-foreground/70 text-sm">Unity before kick-off</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -168,42 +144,22 @@ export default function CampusLife() {
             </p>
           </div>
 
-          {/* Featured award photo */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div className="relative overflow-hidden rounded-xl shadow-2xl">
-              <img src={awards2Img} alt="Staff receiving award with trophy and certificate" className="w-full h-80 object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 flex items-center gap-3">
-                <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
-                <p className="text-white font-semibold">District Awards Ceremony</p>
-              </div>
-            </div>
-            <div className="relative overflow-hidden rounded-xl shadow-2xl">
-              <img src={awards1Img} alt="Teacher receiving award" className="w-full h-80 object-cover object-top" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 flex items-center gap-3">
-                <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
-                <p className="text-white font-semibold">Educator Recognition</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Secondary awards row */}
+          {/* Awards photos - arranged bottom-to-top: individual recognition first, ceremony second */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src={awardsTrophiesImg} alt="Multiple trophies on display at awards" className="w-full h-64 object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-5">
-                <p className="text-white font-semibold">Trophy Collection</p>
-                <p className="text-foreground/60 text-sm">Multiple award categories</p>
-              </div>
-            </div>
             <div className="relative overflow-hidden rounded-xl shadow-xl">
               <img src={awardsCertsImg} alt="Teachers with framed certificates and trophies" className="w-full h-64 object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5">
                 <p className="text-white font-semibold">Certificate Recipients</p>
                 <p className="text-foreground/60 text-sm">Staff honoured for excellence</p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-xl shadow-xl">
+              <img src={awards2Img} alt="Staff receiving award with trophy and certificate" className="w-full h-64 object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 p-5 flex items-center gap-3">
+                <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
+                <p className="text-white font-semibold">District Awards Ceremony</p>
               </div>
             </div>
           </div>

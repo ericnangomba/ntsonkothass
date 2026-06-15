@@ -4,8 +4,8 @@ import { Calculator, Globe2, Landmark } from "lucide-react";
 
 import heroImg from "@assets/unnamed_(11)_1779883577723.jpg";
 import classImg1 from "@assets/unnamed_(11)_1779883577723.jpg";
-import classImg2 from "@assets/unnamed_(12)_1779883577723.jpg";
 import labImg from "@assets/lab_biology_dissection.jpg";
+const labTestsImg = "/lab_tests1.jpeg";
 
 const passRateData = [
   { year: "2021", candidates: 251, achieved: 157, rate: 62.55 },
@@ -201,7 +201,7 @@ export default function Academics() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <img src={classImg1} alt="Classroom learning" className="w-full h-96 object-cover rounded-xl shadow-2xl" />
-            <img src={classImg2} alt="Students studying" className="w-full h-96 object-cover rounded-xl shadow-2xl" />
+            <img src={labTestsImg} alt="Students conducting lab tests" className="w-full h-96 object-cover rounded-xl shadow-2xl" />
           </div>
         </div>
       </section>

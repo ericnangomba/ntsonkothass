@@ -84,10 +84,6 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-xs text-primary font-bold tracking-widest mb-1 uppercase">EMIS: 200600642</p>
-              <p className="text-xs text-foreground/60 uppercase tracking-widest">Quintile 2 No-Fee School</p>
-            </div>
           </div>
         </div>
 

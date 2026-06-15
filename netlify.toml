@@ -1,11 +1,11 @@
 [build]
-  command = "pnpm install && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm --filter @workspace/ntsonkotha-website run build"
   publish = "artifacts/ntsonkotha-website/dist/public"
 
 [build.environment]
+  NODE_VERSION = "22"
   NODE_ENV = "production"
   BASE_PATH = "/"
-  PORT = "3000"
 
 [[redirects]]
   from = "/*"
