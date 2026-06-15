@@ -122,8 +122,10 @@ export default function Academics() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors">
-              <Calculator className="w-12 h-12 text-primary mb-6" />
+            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors text-center md:text-left">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto md:mx-0">
+                <Calculator className="w-8 h-8 text-primary" />
+              </div>
               <h3 className="text-2xl font-bold text-white mb-4">STEM Stream</h3>
               <p className="text-foreground/70 text-sm leading-relaxed mb-6">Mathematics, Physical Sciences, Life Sciences, and Agricultural Sciences focused on developing future innovators.</p>
               <ul className="space-y-2 text-sm text-foreground/80 font-medium">
@@ -133,8 +135,10 @@ export default function Academics() {
               </ul>
             </div>
 
-            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors">
-              <Landmark className="w-12 h-12 text-primary mb-6" />
+            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors text-center md:text-left">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto md:mx-0">
+                <Landmark className="w-8 h-8 text-primary" />
+              </div>
               <h3 className="text-2xl font-bold text-white mb-4">Commercial Stream</h3>
               <p className="text-foreground/70 text-sm leading-relaxed mb-6">Accounting, Business Studies, and Economics preparing learners for the corporate and entrepreneurial world.</p>
               <ul className="space-y-2 text-sm text-foreground/80 font-medium">
@@ -144,8 +148,10 @@ export default function Academics() {
               </ul>
             </div>
 
-            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors">
-              <Globe2 className="w-12 h-12 text-primary mb-6" />
+            <div className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary transition-colors text-center md:text-left">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto md:mx-0">
+                <Globe2 className="w-8 h-8 text-primary" />
+              </div>
               <h3 className="text-2xl font-bold text-white mb-4">Humanities</h3>
               <p className="text-foreground/70 text-sm leading-relaxed mb-6">History, Geography, and Languages cultivating critical thinkers, leaders, and communicators.</p>
               <ul className="space-y-2 text-sm text-foreground/80 font-medium">

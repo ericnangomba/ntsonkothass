@@ -101,23 +101,35 @@ export default function Home() {
 
       {/* Quick Links Ribbon */}
       <div className="bg-primary py-4">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center md:justify-between items-center gap-6">
-          <Link href="/admissions" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-            <GraduationCap className="w-5 h-5" /> Admissions
-          </Link>
-          <span className="hidden md:block text-primary-foreground/30">•</span>
-          <Link href="/academics" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-            <Trophy className="w-5 h-5" /> Academic Results
-          </Link>
-          <span className="hidden md:block text-primary-foreground/30">•</span>
-          <Link href="/campus-life" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-            <Users className="w-5 h-5" /> Campus Life
-          </Link>
-          <span className="hidden md:block text-primary-foreground/30">•</span>
-          <Link href="/contact" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-            <MapPin className="w-5 h-5" /> Contact Us
-          </Link>
-        </div>
+          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center md:justify-between items-center gap-6">
+            <Link href="/admissions" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
+              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <GraduationCap className="w-6 h-6 text-primary" />
+              </span>
+              <span className="ml-2">Admissions</span>
+            </Link>
+            <span className="hidden md:block text-primary-foreground/30">•</span>
+            <Link href="/academics" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
+              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Trophy className="w-6 h-6 text-primary" />
+              </span>
+              <span className="ml-2">Academic Results</span>
+            </Link>
+            <span className="hidden md:block text-primary-foreground/30">•</span>
+            <Link href="/campus-life" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
+              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Users className="w-6 h-6 text-primary" />
+              </span>
+              <span className="ml-2">Campus Life</span>
+            </Link>
+            <span className="hidden md:block text-primary-foreground/30">•</span>
+            <Link href="/contact" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
+              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-primary" />
+              </span>
+              <span className="ml-2">Contact Us</span>
+            </Link>
+          </div>
       </div>
 
       {/* Stats Section */}

@@ -54,8 +54,10 @@ export default function Admissions() {
                       {i + 1}
                     </div>
                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-card p-6 rounded-xl border border-white/5 shadow-lg">
-                      <div className="flex items-center gap-3 mb-2">
-                        <step.icon className="w-5 h-5 text-accent" />
+                      <div className="flex flex-col sm:flex-row items-center gap-3 mb-2 text-center sm:text-left">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto sm:mx-0">
+                          <step.icon className="w-6 h-6 text-accent" />
+                        </div>
                         <h3 className="font-bold text-white text-lg">{step.title}</h3>
                       </div>
                       <p className="text-sm text-foreground/70">{step.desc}</p>
