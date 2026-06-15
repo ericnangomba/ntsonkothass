@@ -114,8 +114,8 @@ export default function CampusLife() {
             <div className="order-1 lg:order-2 text-center lg:text-left lg:max-w-xl mx-auto lg:mx-0">
               <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Beyond the Classroom</h3>
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Culture &amp; Social Impact</h2>
-              <div className="grid gap-6">
-                <div className="bg-card p-6 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-card p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
                   <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto sm:mx-0">
                       <Music className="w-8 h-8 text-primary" />
@@ -126,7 +126,7 @@ export default function CampusLife() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-card p-6 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
+                <div className="bg-card p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
                   <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto sm:mx-0">
                       <Globe className="w-8 h-8 text-primary" />
