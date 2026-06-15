@@ -147,7 +147,7 @@ export default function CampusLife() {
           {/* Awards photos - arranged bottom-to-top: individual recognition first, ceremony second */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src={awardsCertsImg} alt="Teachers with framed certificates and trophies" className="w-full h-64 object-cover object-top" />
+              <img src={awardsCertsImg} alt="Teachers with framed certificates and trophies" className="w-full h-80 md:h-[28rem] object-cover object-bottom" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5">
                 <p className="text-white font-semibold">Certificate Recipients</p>
@@ -155,7 +155,7 @@ export default function CampusLife() {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src={awards2Img} alt="Staff receiving award with trophy and certificate" className="w-full h-64 object-cover" />
+              <img src={awards2Img} alt="Staff receiving award with trophy and certificate" className="w-full h-80 md:h-[28rem] object-cover object-bottom" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5 flex items-center gap-3">
                 <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
