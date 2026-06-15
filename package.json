@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "node -e \"const fs = require('fs'); try { fs.unlinkSync('package-lock.json'); } catch(e) {} try { fs.unlinkSync('yarn.lock'); } catch(e) {} if (!process.env.npm_config_user_agent?.startsWith('pnpm/')) { console.error('Use pnpm instead'); process.exit(1); }\"",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "preinstall": "node -e \"const fs = require('fs'); ['package-lock.json', 'yarn.lock'].forEach(f => fs.existsSync(f) && fs.unlinkSync(f)); if (!process.env.npm_config_user_agent?.startsWith('pnpm/')) { console.error('Error: This repository requires pnpm for package management.'); process.exit(1); }\"",
+    "build": "pnpm run typecheck:libs && pnpm -r --if-present run build",
+    "dev": "pnpm --filter ./School-Asset-Manager run dev -- --port 3000",
+    "dev:all": "pnpm -r --if-present run dev",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
