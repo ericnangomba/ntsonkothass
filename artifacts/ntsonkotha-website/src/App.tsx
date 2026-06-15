@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -5,14 +6,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Home from "@/pages/home";
-import About from "@/pages/about";
-import Academics from "@/pages/academics";
-import CampusLife from "@/pages/campus-life";
-import Admissions from "@/pages/admissions";
-import Contact from "@/pages/contact";
-import Register from "@/pages/register";
-import NotFound from "@/pages/not-found";
+
+const Home = lazy(() => import("@/pages/home"));
+const About = lazy(() => import("@/pages/about"));
+const Academics = lazy(() => import("@/pages/academics"));
+const CampusLife = lazy(() => import("@/pages/campus-life"));
+const Admissions = lazy(() => import("@/pages/admissions"));
+const Contact = lazy(() => import("@/pages/contact"));
+const Register = lazy(() => import("@/pages/register"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient();
 
@@ -39,7 +41,9 @@ function App() {
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">
-              <Router />
+              <Suspense fallback={<div className="flex min-h-[60vh] items-center justify-center text-xl text-foreground/80">Loading…</div>}>
+                <Router />
+              </Suspense>
             </main>
             <Footer />
           </div>

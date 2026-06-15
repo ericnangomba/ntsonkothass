@@ -52,7 +52,7 @@ export default function CampusLife() {
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className="text-center lg:text-left">
               <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Our Home</h3>
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">The Boarding Experience</h2>
               <div className="space-y-6 text-foreground/80 text-lg leading-relaxed">
@@ -111,18 +111,18 @@ export default function CampusLife() {
             <div className="order-2 lg:order-1">
               <img src={agriImg} alt="Agricultural science outreach activity" className="w-full h-auto object-cover rounded-xl shadow-2xl" />
             </div>
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 text-center lg:text-left lg:max-w-xl mx-auto lg:mx-0">
               <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Beyond the Classroom</h3>
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Culture &amp; Social Impact</h2>
               <div className="space-y-8">
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
                   <div className="mt-1"><Music className="w-6 h-6 text-primary" /></div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">Traditional Choir &amp; Debate</h4>
                     <p className="text-foreground/70 leading-relaxed">Our award-winning traditional choir preserves our rich Xhosa heritage, while our debate teams compete fiercely in regional symposiums, developing articulate future leaders.</p>
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
                   <div className="mt-1"><Globe className="w-6 h-6 text-primary" /></div>
                   <div>
                     <h4 className="text-xl font-bold text-white mb-2">Agricultural Science Outreach</h4>

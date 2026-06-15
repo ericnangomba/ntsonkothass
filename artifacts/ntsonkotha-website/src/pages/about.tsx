@@ -43,7 +43,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="prose prose-invert prose-lg max-w-none"
+            className="prose prose-invert prose-lg max-w-none text-center md:text-left mx-auto"
           >
             <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-serif mb-12 text-center">
               Founded in May 1969, Ntsonkotha Senior Secondary School owes its existence to the visionary Nomtshongwana clan who generously donated the land, and the passionate local community spearheaded by Mr. Noholoza.

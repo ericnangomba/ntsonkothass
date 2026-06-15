@@ -141,7 +141,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-8 text-center lg:text-left"
             >
               <div className="space-y-2">
                 <h3 className="text-accent font-bold tracking-widest uppercase text-sm">Welcome</h3>
