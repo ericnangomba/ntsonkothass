@@ -24,17 +24,19 @@ export default function CampusLife() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="/Campus Life.jpeg" 
             alt="Students on outing" 
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="sync"
           />
           <div className="absolute inset-0 bg-[#0D1B4E]/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
-        <div className="relative z-10 text-center px-4 mt-20">
+        <div className="relative z-10 text-center px-4 mt-12 md:mt-20 flex flex-col items-center justify-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,7 +66,7 @@ export default function CampusLife() {
             </div>
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 rounded-xl transform rotate-3"></div>
-              <img src={summerImg} alt="Students in summer uniform" className="relative z-10 w-full h-auto object-cover rounded-xl shadow-2xl border-4 border-card" />
+              <img src={summerImg} alt="Students in summer uniform" className="relative z-10 w-full h-auto object-cover rounded-xl shadow-2xl border-4 border-card" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -88,6 +90,8 @@ export default function CampusLife() {
                   src={sport.img}
                   alt={sport.alt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/90 via-[#0D1B4E]/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6">
@@ -146,7 +150,7 @@ export default function CampusLife() {
           {/* Awards photos - arranged bottom-to-top: individual recognition first, ceremony second */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src={awardsCertsImg} alt="Teachers with framed certificates and trophies" className="w-full h-80 md:h-[28rem] object-cover object-bottom" />
+              <img src={awardsCertsImg} alt="Teachers with framed certificates and trophies" className="w-full h-64 md:h-80 lg:h-[28rem] object-cover object-bottom" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5">
                 <p className="text-white font-semibold">Certificate Recipients</p>
@@ -157,8 +161,10 @@ export default function CampusLife() {
               <img
                 src={awards2Img}
                 alt="Staff receiving award with trophy and certificate"
-                className="w-full h-80 md:h-[28rem] object-cover"
+                className="w-full h-64 md:h-80 lg:h-[28rem] object-cover"
                 style={{ objectPosition: "center 15%" }}
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B4E]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5 flex items-center gap-3">
@@ -174,9 +180,9 @@ export default function CampusLife() {
       <section className="py-12 pb-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <img src={gallery1} alt="Trophy celebration" className="w-full h-72 object-cover rounded-lg shadow-lg" />
-            <img src={gallery2} alt="Community event" className="w-full h-72 object-cover rounded-lg shadow-lg" />
-            <img src={gallery3} alt="Class portrait" className="w-full h-72 object-cover rounded-lg shadow-lg" />
+            <img src={gallery1} alt="Trophy celebration" className="w-full h-72 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async" />
+            <img src={gallery2} alt="Community event" className="w-full h-72 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async" />
+            <img src={gallery3} alt="Class portrait" className="w-full h-72 object-cover rounded-lg shadow-lg" loading="lazy" decoding="async" />
           </div>
         </div>
       </section>

@@ -11,12 +11,14 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={heroImg} 
             alt="Ntsonkotha S.S.S Administration" 
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="sync"
           />
           <div className="absolute inset-0 bg-[#0D1B4E]/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -117,11 +119,11 @@ export default function About() {
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <img src={gallery1} alt="School Assembly" className="w-full h-72 object-cover rounded-lg shadow-xl" />
-            <img src={gallery2} alt="Students with Teacher" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" />
-            <img src={gallery3} alt="Community Group" className="w-full h-72 object-cover rounded-lg shadow-xl" />
+            <img src={gallery1} alt="School Assembly" className="w-full h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
+            <img src={gallery2} alt="Students with Teacher" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" loading="lazy" decoding="async" />
+            <img src={gallery3} alt="Community Group" className="w-full h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
             <div className="relative">
-              <img src={awardsImg} alt="School and Teacher Awards Ceremony" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" />
+              <img src={awardsImg} alt="School and Teacher Awards Ceremony" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>

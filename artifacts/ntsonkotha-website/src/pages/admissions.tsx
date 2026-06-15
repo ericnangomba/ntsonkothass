@@ -15,6 +15,8 @@ export default function Admissions() {
             src={heroImg} 
             alt="Students assembly" 
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="sync"
           />
           <div className="absolute inset-0 bg-[#0D1B4E]/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
