@@ -254,7 +254,7 @@ export default function Register() {
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl><SelectTrigger className="bg-background"><SelectValue placeholder="Select Grade" /></SelectTrigger></FormControl>
                             <SelectContent>
-                              {["Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"].map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+                              {["Grade 8", "Grade 9", "Grade 10", "Grade 11 (Special Cases)"].map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
                             </SelectContent>
                           </Select>
                           <FormMessage />

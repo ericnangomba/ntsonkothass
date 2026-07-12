@@ -41,6 +41,11 @@ export default function Admissions() {
             {/* Timeline */}
             <div className="lg:col-span-7">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-10">Admissions Framework</h2>
+              <div className="mb-8 rounded-xl border border-primary/20 bg-primary/5 p-6">
+                <p className="text-foreground/80 leading-relaxed">
+                  Admissions are available for Grades 8 to 10. Grade 11 admissions are considered on special cases only, and Grade 12 admissions are not available.
+                </p>
+              </div>
               
               <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-white/10">
                 {[
@@ -76,7 +81,6 @@ export default function Admissions() {
                 <ul className="space-y-4">
                   {[
                     "Certified Birth Certificate / ID",
-                    "Immunization Card (Clinic Card)",
                     "Latest School Report Card",
                     "Transfer Letter (if applicable)",
                     "Study Permits (international learners)"

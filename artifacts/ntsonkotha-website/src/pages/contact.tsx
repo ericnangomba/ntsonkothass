@@ -107,11 +107,10 @@ export default function Contact() {
               </div>
               <h3 className="font-bold text-white text-xl mb-4">Contact Numbers</h3>
               <p className="text-foreground/70 leading-relaxed">
-                Primary: +27 87 160 0951<br />
-                Alt: +27 47 878 6900
+                Primary: +27 66 008 7077
               </p>
               <div className="mt-4 flex items-center gap-2 text-sm text-primary font-medium">
-                <Mail className="w-4 h-4" /> ntsonkothaschool@gmail.com
+                <Mail className="w-4 h-4" /> principal.2000600642@ecschools.org.za
               </div>
             </div>
 
