@@ -11,7 +11,7 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Hero */}
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={heroImg} 
@@ -24,11 +24,11 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
         
-        <div className="relative z-10 text-center px-4 mt-20">
+        <div className="relative z-10 text-center px-4 mt-0 md:mt-0">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl md:text-7xl font-black text-primary mb-4 drop-shadow-lg"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-primary mb-3 md:mb-4 drop-shadow-lg"
           >
             Our Heritage & Legacy
           </motion.h1>
@@ -37,7 +37,7 @@ export default function About() {
       </section>
 
       {/* The Story */}
-      <section className="py-24 bg-background">
+      <section className="py-12 md:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -45,7 +45,7 @@ export default function About() {
             viewport={{ once: true }}
             className="prose prose-invert prose-lg max-w-none text-center md:text-left mx-auto"
           >
-            <p className="text-xl md:text-2xl leading-relaxed text-foreground/90 font-serif mb-12 text-center">
+            <p className="text-lg md:text-xl lg:text-2xl leading-relaxed text-foreground/90 font-serif mb-8 md:mb-12 text-center">
               Founded in May 1969, Ntsonkotha Senior Secondary School owes its existence to the visionary Nomtshongwana clan who generously donated the land, and the passionate local community spearheaded by Mr. Noholoza.
             </p>
             <p className="text-foreground/80 leading-relaxed mb-8">
@@ -59,18 +59,18 @@ export default function About() {
       </section>
 
       {/* Motto Section */}
-      <section className="py-24 bg-card border-y border-white/5 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-card border-y border-white/5 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="font-serif text-6xl md:text-8xl font-black text-white mb-8 tracking-wider opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap select-none pointer-events-none">
+          <h2 className="font-serif text-4xl md:text-6xl lg:text-8xl font-black text-white mb-6 md:mb-8 tracking-wider opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap select-none pointer-events-none text-center">
             PER ARDUA AD ASTRA
           </h2>
           <div className="relative">
-            <h3 className="font-serif text-4xl md:text-6xl font-bold text-primary mb-8 drop-shadow-md">
+            <h3 className="font-serif text-3xl md:text-4xl lg:text-6xl font-bold text-primary mb-6 md:mb-8 drop-shadow-md">
               "Through Adversity to the Stars"
             </h3>
-            <div className="w-32 h-1 bg-accent mx-auto mb-10"></div>
-            <p className="text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed font-medium">
+            <div className="w-32 h-1 bg-accent mx-auto mb-8 md:mb-10"></div>
+            <p className="text-base md:text-lg lg:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed font-medium">
               This motto encapsulates the spirit of the Ntsonkotha learner. We recognize the socio-economic challenges of our rural context, not as excuses, but as the very fire that tempers our resolve. We forge brilliant futures through hard work, discipline, and unyielding ambition.
             </p>
           </div>
@@ -78,14 +78,14 @@ export default function About() {
       </section>
 
       {/* Our Identity */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">Our Identity</h2>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white">Our Identity</h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
               { icon: BookOpen, title: "Academic Rigor", desc: "A relentless pursuit of academic excellence, evidenced by our consistent 90%+ matric pass rates." },
               { icon: HomeIcon, title: "Disciplined Boarding Life", desc: "A structured, nurturing environment that builds character, independence, and lifelong bonds." },
@@ -98,13 +98,13 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-card p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors text-center"
+                className="bg-card p-6 md:p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-colors text-center"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <pillar.icon className="w-8 h-8 text-primary" />
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <pillar.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">{pillar.title}</h3>
-                <p className="text-foreground/70 text-sm leading-relaxed">{pillar.desc}</p>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4">{pillar.title}</h3>
+                <p className="text-foreground/70 text-xs md:text-sm leading-relaxed">{pillar.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -112,18 +112,18 @@ export default function About() {
       </section>
 
       {/* Gallery Row */}
-      <section className="py-12 bg-background pb-24">
+      <section className="py-12 md:py-24 bg-background pb-16 md:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">Our School in Pictures</h2>
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white">Our School in Pictures</h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <img src={gallery1} alt="School Assembly" className="w-full h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
-            <img src={gallery2} alt="Students with Teacher" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" loading="lazy" decoding="async" />
-            <img src={gallery3} alt="Community Group" className="w-full h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <img src={gallery1} alt="School Assembly" className="w-full h-48 sm:h-56 md:h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
+            <img src={gallery2} alt="Students with Teacher" className="w-full h-48 sm:h-56 md:h-72 object-cover rounded-lg shadow-xl lg:translate-y-0" loading="lazy" decoding="async" />
+            <img src={gallery3} alt="Community Group" className="w-full h-48 sm:h-56 md:h-72 object-cover rounded-lg shadow-xl" loading="lazy" decoding="async" />
             <div className="relative">
-              <img src={awardsImg} alt="School and Teacher Awards Ceremony" className="w-full h-72 object-cover rounded-lg shadow-xl lg:translate-y-6" loading="lazy" decoding="async" />
+              <img src={awardsImg} alt="School and Teacher Awards Ceremony" className="w-full h-48 sm:h-56 md:h-72 object-cover rounded-lg shadow-xl lg:translate-y-0" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>

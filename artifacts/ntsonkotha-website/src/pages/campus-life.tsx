@@ -24,7 +24,7 @@ export default function CampusLife() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Hero */}
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="/Campus Life.jpeg" 
@@ -36,11 +36,11 @@ export default function CampusLife() {
           <div className="absolute inset-0 bg-[#0D1B4E]/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
-        <div className="relative z-10 text-center px-4 mt-12 md:mt-20 flex flex-col items-center justify-center">
+        <div className="relative z-10 text-center px-4 mt-0 md:mt-0 flex flex-col items-center justify-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl md:text-7xl font-black text-primary mb-4 drop-shadow-lg"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-primary mb-3 md:mb-4 drop-shadow-lg"
           >
             Campus Life
           </motion.h1>
@@ -49,13 +49,13 @@ export default function CampusLife() {
       </section>
 
       {/* Boarding */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center place-items-center lg:place-items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center place-items-center lg:place-items-stretch">
             <div className="w-full max-w-xl text-center lg:text-left mx-auto">
-              <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Our Home</h3>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">The Boarding Experience</h2>
-              <div className="space-y-6 text-foreground/80 text-lg leading-relaxed">
+              <h3 className="text-accent font-bold tracking-widest uppercase text-xs md:text-sm mb-2">Our Home</h3>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-bold text-white mb-6 md:mb-8">The Boarding Experience</h2>
+              <div className="space-y-4 md:space-y-6 text-foreground/80 text-sm md:text-base lg:text-lg leading-relaxed">
                 <p>
                   As one of only three elite boarding institutions in the region, Ntsonkotha provides a highly structured and supportive environment for young men and women.
                 </p>
@@ -64,7 +64,7 @@ export default function CampusLife() {
                 </p>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative w-full max-w-lg">
               <div className="absolute -inset-4 bg-primary/20 rounded-xl transform rotate-3"></div>
               <img src={summerImg} alt="Students in summer uniform" className="relative z-10 w-full h-auto object-cover rounded-xl shadow-2xl border-4 border-card" loading="lazy" decoding="async" />
             </div>
@@ -73,17 +73,17 @@ export default function CampusLife() {
       </section>
 
       {/* Sports Portfolio */}
-      <section className="py-24 bg-card border-y border-white/5">
+      <section className="py-16 md:py-24 bg-card border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">On the Field</h3>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">Sports &amp; Athletics</h2>
-            <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
-            <p className="mt-6 text-foreground/70 max-w-2xl mx-auto">Our learners compete with pride at district and provincial level across four major codes.</p>
+          <div className="text-center mb-10 md:mb-16">
+            <h3 className="text-accent font-bold tracking-widest uppercase text-xs md:text-sm mb-2">On the Field</h3>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-bold text-white">Sports &amp; Athletics</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4 md:mt-6"></div>
+            <p className="mt-4 md:mt-6 text-foreground/70 max-w-2xl mx-auto text-sm md:text-base">Our learners compete with pride at district and provincial level across four major codes.</p>
           </div>
 
           {/* 2×2 Sport Photo Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {sports.map((sport) => (
               <div key={sport.name} className="relative overflow-hidden rounded-xl shadow-2xl group aspect-video">
                 <img
@@ -105,35 +105,35 @@ export default function CampusLife() {
       </section>
 
       {/* Culture & Outreach */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <img src={agriImg} alt="Agricultural science outreach activity" className="w-full h-auto object-cover rounded-xl shadow-2xl" />
+              <img src={agriImg} alt="Agricultural science outreach activity" className="w-full h-48 sm:h-64 md:h-auto object-cover rounded-xl shadow-2xl" />
             </div>
             <div className="order-1 lg:order-2 text-center lg:text-left lg:max-w-xl mx-auto lg:mx-0">
-              <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Beyond the Classroom</h3>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Culture &amp; Social Impact</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-card p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
-                  <div className="flex flex-col gap-4 items-center text-center sm:items-start sm:text-left">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex-shrink-0 aspect-square flex items-center justify-center overflow-hidden mx-auto sm:mx-0">
-                      <Music className="w-8 h-8 text-primary" />
+              <h3 className="text-accent font-bold tracking-widest uppercase text-xs md:text-sm mb-2">Beyond the Classroom</h3>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-bold text-white mb-6 md:mb-8">Culture &amp; Social Impact</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                <div className="bg-card p-4 md:p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center">
+                  <div className="flex flex-col gap-3 md:gap-4 items-center text-center">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 flex-shrink-0 aspect-square flex items-center justify-center overflow-hidden mx-auto">
+                      <Music className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                     </div>
                     <div>
-                      <h4 className="text-2xl font-bold text-white mb-3">Traditional Choir &amp; Debate</h4>
-                      <p className="text-foreground/70 leading-relaxed">Our award-winning traditional choir preserves our rich Xhosa heritage, while our debate teams compete fiercely in regional symposiums, developing articulate future leaders.</p>
+                      <h4 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-3">Traditional Choir &amp; Debate</h4>
+                      <p className="text-foreground/70 text-xs md:text-sm leading-relaxed">Our award-winning traditional choir preserves our rich Xhosa heritage, while our debate teams compete fiercely in regional symposiums, developing articulate future leaders.</p>
                     </div>
                   </div>
                 </div>
-                <div className="bg-card p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center sm:text-left">
-                  <div className="flex flex-col gap-4 items-center text-center sm:items-start sm:text-left">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex-shrink-0 aspect-square flex items-center justify-center overflow-hidden mx-auto sm:mx-0">
-                      <Globe className="w-8 h-8 text-primary" />
+                <div className="bg-card p-4 md:p-8 rounded-xl border border-white/5 shadow-xl hover:border-primary transition-colors text-center">
+                  <div className="flex flex-col gap-3 md:gap-4 items-center text-center">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 flex-shrink-0 aspect-square flex items-center justify-center overflow-hidden mx-auto">
+                      <Globe className="w-6 h-6 md:w-8 md:h-8 text-primary" />
                     </div>
                     <div>
-                      <h4 className="text-2xl font-bold text-white mb-3">Agricultural Science Outreach</h4>
-                      <p className="text-foreground/70 leading-relaxed">Learners engage hands-on with soil science and sustainable farming, connecting academic learning to real environmental stewardship in our local communities of Mgqukhwebe and Agnes Rest.</p>
+                      <h4 className="text-base md:text-2xl font-bold text-white mb-2 md:mb-3">Agricultural Science Outreach</h4>
+                      <p className="text-foreground/70 text-xs md:text-sm leading-relaxed">Learners engage hands-on with soil science and sustainable farming, connecting academic learning to real environmental stewardship in our local communities of Mgqukhwebe and Agnes Rest.</p>
                     </div>
                   </div>
                 </div>
@@ -144,10 +144,10 @@ export default function CampusLife() {
       </section>
 
       {/* School & Teacher Awards */}
-      <section className="py-24 bg-card border-y border-white/5">
+      <section className="py-16 md:py-24 bg-card border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Recognition of Excellence</h3>
+          <div className="text-center mb-10 md:mb-16">
+            <h3 className="text-accent font-bold tracking-widest uppercase text-xs md:text-sm mb-2">Recognition of Excellence</h3>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">School &amp; Teacher Awards</h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
             <p className="mt-6 text-foreground/70 max-w-2xl mx-auto">

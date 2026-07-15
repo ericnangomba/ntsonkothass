@@ -19,7 +19,7 @@ export default function Academics() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={heroImg} 
@@ -30,11 +30,11 @@ export default function Academics() {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
         
-        <div className="relative z-10 text-center px-4 mt-20">
+        <div className="relative z-10 text-center px-4 mt-0">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl md:text-7xl font-black text-primary mb-4 drop-shadow-lg"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-primary mb-3 md:mb-4 drop-shadow-lg"
           >
             Academic Excellence
           </motion.h1>
@@ -43,30 +43,30 @@ export default function Academics() {
       </section>
 
       {/* Intro */}
-      <section className="py-16 bg-background">
+      <section className="py-12 md:py-16 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-2xl md:text-3xl font-serif text-white leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white leading-relaxed">
             Ntsonkotha is a consistently <span className="text-primary font-bold">top-performing public school</span> in the Chris Hani West district, proving that rural institutions can compete at the highest national levels.
           </p>
         </div>
       </section>
 
       {/* Results Section */}
-      <section className="py-24 bg-card border-y border-white/5">
+      <section className="py-16 md:py-24 bg-card border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold text-white mb-4">5-Year Matric Results</h2>
-            <p className="text-foreground/70 max-w-2xl mx-auto">A trajectory of consistent improvement and dedication from our learners and educators.</p>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white mb-2 md:mb-4">5-Year Matric Results</h2>
+            <p className="text-foreground/70 max-w-2xl mx-auto text-sm md:text-base">A trajectory of consistent improvement and dedication from our learners and educators.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             {/* Chart */}
-            <div className="h-[400px] w-full bg-background p-6 rounded-xl border border-white/5 shadow-xl">
+            <div className="h-80 sm:h-96 md:h-[400px] w-full bg-background p-4 md:p-6 rounded-xl border border-white/5 shadow-xl">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={passRateData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                <BarChart data={passRateData} margin={{ top: 20, right: 10, left: -20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                  <XAxis dataKey="year" stroke="rgba(255,255,255,0.5)" />
-                  <YAxis stroke="rgba(255,255,255,0.5)" domain={[0, 100]} tickFormatter={(val) => `${val}%`} />
+                  <XAxis dataKey="year" stroke="rgba(255,255,255,0.5)" tick={{ fontSize: 12 }} />
+                  <YAxis stroke="rgba(255,255,255,0.5)" domain={[0, 100]} tickFormatter={(val) => `${val}%`} tick={{ fontSize: 12 }} />
                   <RechartsTooltip 
                     cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                     contentStyle={{ backgroundColor: '#0D1B4E', borderColor: '#F5C000', color: '#fff' }}

@@ -19,12 +19,9 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-[#0D1B4E] border-b-2 border-primary w-full shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-4">
-            <img src={logoUrl} alt="Ntsonkotha S.S.S Logo" className="h-14 w-auto object-contain" />
-            <span className="font-serif font-bold text-xl md:text-2xl text-primary tracking-wide">
-              NTSONKOTHA S.S.S.
-            </span>
+        <div className="flex items-center justify-between h-20 sm:h-24 md:h-32">
+          <Link href="/" className="flex items-center gap-2 sm:gap-4">
+            <img src={logoUrl} alt="Ntsonkotha S.S.S Logo" className="h-16 sm:h-24 md:h-40 w-auto object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
@@ -33,14 +30,14 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
+                  className="text-foreground hover:text-primary transition-colors font-medium text-xs lg:text-sm uppercase tracking-wider"
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
             <Link href="/register">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-wider px-6">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-wider px-4 lg:px-6 text-xs lg:text-sm">
                 Register
               </Button>
             </Link>
@@ -50,10 +47,10 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-foreground hover:bg-white/10"
+              className="text-foreground hover:bg-white/10 h-10 w-10"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6 text-primary" />}
+              {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6 text-primary" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />}
             </Button>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative h-[100dvh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[70vh] md:h-[90vh] lg:h-[100dvh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={heroImg} 
@@ -43,21 +43,21 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0D1B4E]/40 via-[#0D1B4E]/25 to-[#0D1B4E]/70" />
         </div>
         
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center mt-16">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center mt-4 md:mt-8">
           <motion.img 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             src={logoUrl} 
             alt="School Logo" 
-            className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 drop-shadow-2xl"
+            className="w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto mb-4 md:mb-6 lg:mb-8 drop-shadow-2xl"
           />
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-black text-primary mb-6 leading-tight drop-shadow-lg"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-primary mb-3 md:mb-6 leading-tight drop-shadow-lg"
           >
             Through Adversity <br/><span className="text-white">to the Stars</span>
           </motion.h1>
@@ -66,7 +66,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-2xl text-foreground/90 max-w-3xl mx-auto mb-12 leading-relaxed font-light"
+            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-foreground/90 max-w-3xl mx-auto mb-6 md:mb-10 lg:mb-12 leading-relaxed font-light px-2"
           >
             Welcome to Ntsonkotha Senior Secondary School — A proud pillar of academic excellence, heritage, and community spirit in the Eastern Cape since 1969.
           </motion.p>
@@ -75,15 +75,15 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 px-2"
           >
             <Link href="/campus-life">
-              <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-wider h-14 px-8 text-base">
+              <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-wider h-12 sm:h-14 px-6 sm:px-8 text-xs sm:text-base">
                 Explore Our Campus
               </Button>
             </Link>
             <Link href="/admissions">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-accent text-accent hover:bg-accent hover:text-white font-bold uppercase tracking-wider h-14 px-8 text-base bg-transparent">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-accent text-accent hover:bg-accent hover:text-white font-bold uppercase tracking-wider h-12 sm:h-14 px-6 sm:px-8 text-xs sm:text-base bg-transparent">
                 Admissions Info
               </Button>
             </Link>
@@ -100,42 +100,42 @@ export default function Home() {
       </section>
 
       {/* Quick Links Ribbon */}
-      <div className="bg-primary py-4">
-          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center md:justify-between items-center gap-6">
-            <Link href="/admissions" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-primary" />
+      <div className="bg-primary py-3 md:py-4">
+          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-3 md:gap-6">
+            <Link href="/admissions" className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors text-center">
+              <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto md:mx-0">
+                <GraduationCap className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </span>
-              <span className="ml-2">Admissions</span>
+              <span className="text-xs md:text-sm">Admissions</span>
             </Link>
             <span className="hidden md:block text-primary-foreground/30">•</span>
-            <Link href="/academics" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-primary" />
+            <Link href="/academics" className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors text-center">
+              <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto md:mx-0">
+                <Trophy className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </span>
-              <span className="ml-2">Academic Results</span>
+              <span className="text-xs md:text-sm">Academic Results</span>
             </Link>
             <span className="hidden md:block text-primary-foreground/30">•</span>
-            <Link href="/campus-life" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Users className="w-6 h-6 text-primary" />
+            <Link href="/campus-life" className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors text-center">
+              <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto md:mx-0">
+                <Users className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </span>
-              <span className="ml-2">Campus Life</span>
+              <span className="text-xs md:text-sm">Campus Life</span>
             </Link>
             <span className="hidden md:block text-primary-foreground/30">•</span>
-            <Link href="/contact" className="flex items-center gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors">
-              <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-primary" />
+            <Link href="/contact" className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-primary-foreground font-bold uppercase tracking-widest hover:text-white transition-colors text-center">
+              <span className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto md:mx-0">
+                <MapPin className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </span>
-              <span className="ml-2">Contact Us</span>
+              <span className="text-xs md:text-sm">Contact Us</span>
             </Link>
           </div>
       </div>
 
       {/* Stats Section */}
-      <section className="bg-card py-16 border-y border-white/5">
+      <section className="bg-card py-12 md:py-16 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x-0 md:divide-x divide-white/10">
             <StatCounter label="Year Founded" value="1969" />
             <StatCounter label="2025 Matric Pass" value="95.2" suffix="%" />
             <StatCounter label="Enrolled Learners" value="620" suffix="+" />
@@ -201,15 +201,15 @@ export default function Home() {
       </div>
 
       {/* Latest Highlights */}
-      <section className="py-24 bg-card">
+      <section className="py-16 md:py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-2">Campus News</h3>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">Latest Highlights</h2>
+          <div className="text-center mb-12 md:mb-16">
+            <h3 className="text-accent font-bold tracking-widest uppercase text-xs md:text-sm mb-2">Campus News</h3>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white">Latest Highlights</h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 title: "Annual Cultural Day",
