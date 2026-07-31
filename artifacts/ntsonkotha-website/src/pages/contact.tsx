@@ -48,14 +48,35 @@ export default function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Message Sent Successfully",
-      description: "We will get back to you as soon as possible.",
-      className: "bg-primary text-primary-foreground border-none",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch("http://localhost:3001/api/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message");
+      }
+
+      toast({
+        title: "Message Sent Successfully",
+        description: "We will get back to you as soon as possible.",
+        className: "bg-primary text-primary-foreground border-none",
+      });
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        className: "bg-destructive text-destructive-foreground border-none",
+      });
+    }
   }
 
   return (
