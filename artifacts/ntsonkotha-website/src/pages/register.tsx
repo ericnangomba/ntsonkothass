@@ -308,10 +308,6 @@ export default function Register() {
                         <label className="text-sm font-medium text-foreground">Latest Report Card</label>
                         <Input type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-foreground">Immunization Card</label>
-                        <Input type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
-                      </div>
                       <p className="text-xs text-foreground/60 italic mt-2">* Acceptable formats: PDF, JPG, PNG. Max 5MB per file.</p>
                     </div>
                   </div>
