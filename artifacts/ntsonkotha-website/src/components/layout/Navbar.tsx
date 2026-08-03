@@ -21,7 +21,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24 md:h-32">
           <Link href="/" className="flex items-center gap-2 sm:gap-4">
-            <img src={logoUrl} alt="Ntsonkotha S.S.S Logo" className="h-16 sm:h-24 md:h-40 w-auto object-contain" />
+            <img src={logoUrl} alt="Ntsonkotha S.S.S Logo" className="h-14 sm:h-20 md:h-28 w-auto object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
