@@ -1,14 +1,30 @@
 import { Router, type IRouter } from "express";
+import nodemailer from "nodemailer";
 import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
 // Email configuration
-const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
-const FROM_EMAIL = process.env.FROM_EMAIL || "noreply@ntsonkotha.org.za";
+const GMAIL_USER = process.env.GMAIL_USER;
+const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+const FROM_EMAIL = process.env.FROM_EMAIL || "ntsonkothaschool@gmail.com";
 const TO_EMAIL = "principal.2000600642@ecschools.org.za";
 const BCC_EMAIL = "ericnangomba@hotmail.com";
+
+// Create transporter
+const createTransporter = (): nodemailer.Transporter | null => {
+  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
+    return null;
+  }
+  
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: GMAIL_USER,
+      pass: GMAIL_APP_PASSWORD,
+    },
+  });
+};
 
 router.post("/send", async (req, res) => {
   try {
@@ -19,8 +35,10 @@ router.post("/send", async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ACCOUNT_ID) {
-      logger.error("Cloudflare API credentials not configured");
+    const transporter = createTransporter();
+    
+    if (!transporter) {
+      logger.error("Gmail credentials not configured");
       return res.status(500).json({ error: "Email service not configured" });
     }
 
@@ -48,53 +66,21 @@ router.post("/send", async (req, res) => {
       ${message}
     `;
 
-    // Call Cloudflare Email Sending REST API
-    const response = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,
-      {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${CLOUDFLARE_API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ address: TO_EMAIL }],
-              bcc: [{ address: BCC_EMAIL }],
-            },
-          ],
-          from: {
-            address: FROM_EMAIL,
-            name: "Ntsonkotha Senior Secondary School",
-          },
-          subject: emailSubject,
-          content: [
-            {
-              type: "text/html",
-              value: emailHtml,
-            },
-            {
-              type: "text/plain",
-              value: emailText,
-            },
-          ],
-        }),
-      }
-    );
+    // Send email
+    const info = await transporter.sendMail({
+      from: `"Ntsonkotha Senior Secondary School" <${FROM_EMAIL}>`,
+      to: TO_EMAIL,
+      bcc: BCC_EMAIL,
+      subject: emailSubject,
+      text: emailText,
+      html: emailHtml,
+    });
 
-    const result = await response.json();
-
-    if (!response.ok) {
-      logger.error({ result }, "Failed to send email");
-      return res.status(500).json({ error: "Failed to send email" });
-    }
-
-    logger.info({ to: TO_EMAIL, bcc: BCC_EMAIL }, "Email sent successfully");
+    logger.info({ messageId: info.messageId, to: TO_EMAIL, bcc: BCC_EMAIL }, "Email sent successfully");
     res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
     logger.error({ error }, "Error sending email");
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Failed to send email" });
   }
 });
 
