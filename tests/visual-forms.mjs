@@ -1,0 +1,36 @@
+// Local browser checks with mocked delivery. No external messages are sent.
+import { chromium } from 'playwright';
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const root=path.resolve('artifacts/ntsonkotha-website/dist');
+const server=createServer(async(req,res)=>{try{let file=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!file.startsWith(root))throw Error();if(!path.extname(file))file=path.join(root,'index.html');const bytes=await readFile(file);res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.svg':'image/svg+xml'})[path.extname(file)]||'application/octet-stream');res.end(bytes);}catch{res.statusCode=404;res.end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const port=server.address().port;const base=`http://localhost:${port}`;
+const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || '/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});let accept=false,posts=0;
+ await page.route('**/*',async route=>{const url=route.request().url();if(url===base+'/api/forms.php'){if(route.request().method()==='GET')return route.fulfill({json:{token:'a'.repeat(64)}});posts++;await new Promise(r=>setTimeout(r,250));return route.fulfill({status:accept?200:503,json:{accepted:accept}});}if(!url.startsWith(base))return route.abort();return route.continue();});
+ await page.goto(base+'/register');await page.locator('form').waitFor();
+ await page.getByRole('button',{name:'Submit Application'}).click();assert.equal(posts,0);console.log('PASS blank application blocked');
+ const fields={firstName:'SYNTHETIC TEST ONLY',middleName:'',lastName:'TEST ONLY',dob:'2010-01-01',idNumber:'0000000000000',nationality:'South African',homeLanguage:'isiXhosa',address:'SYNTHETIC TEST ADDRESS',postalCode:'0000',cellNumber:'0000000000',email:'synthetic@example.invalid',guardianName:'SYNTHETIC GUARDIAN',guardianPhone:'0000000000',guardianEmail:'guardian@example.invalid',relationship:'TEST ONLY',currentSchool:'SYNTHETIC SCHOOL',currentGrade:'7',yearApplying:'2027'};
+ for(const [name,value]of Object.entries(fields))await page.locator(`input[name="${name}"]`).fill(value);
+ await page.getByRole('radio',{name:'Female',exact:true}).click();await page.getByRole('radio',{name:'Day Learner'}).click();
+ await page.getByRole('combobox').nth(0).click();await page.getByRole('option',{name:'Grade 8',exact:true}).click();await page.getByRole('combobox').nth(1).click();await page.getByRole('option',{name:'Term 1',exact:true}).click();
+ await page.getByRole('checkbox').nth(1).check();await page.getByRole('checkbox').nth(2).check();
+ await page.getByRole('button',{name:'Submit Application'}).click();await page.getByText('An authorised adult must submit this application',{exact:true}).waitFor();assert.equal(posts,0);console.log('PASS adult declaration required before delivery');
+ await page.getByRole('checkbox').nth(0).check();
+ for(const el of await page.locator('input[type=file]').all())await el.setInputFiles({name:'synthetic.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4\nSYNTHETIC TEST ONLY\n%%EOF')});
+ await page.getByRole('button',{name:'Submit Application'}).click();await page.getByText('Delivery not confirmed',{exact:true}).waitFor();assert.equal(await page.locator('input[name=firstName]').inputValue(),fields.firstName);assert.equal(await page.locator('input[type=file]').first().evaluate(el=>el.files.length),1);assert.equal(posts,1);console.log('PASS failed delivery preserves fields and files');
+ await page.screenshot({path:'/downloads/school-application-failure-desktop.png',fullPage:true});
+ await page.screenshot({path:'/downloads/school-application-failure-viewport.png'});
+ accept=true;await page.getByRole('button',{name:'Submit Application'}).click();await page.getByText('Application queued',{exact:true}).waitFor();assert.equal(await page.locator('input[name=firstName]').inputValue(),'');assert.equal(await page.locator('input[type=file]').first().evaluate(el=>el.files.length),0);console.log('PASS positive queue acceptance clears fields/files');
+ await page.setViewportSize({width:390,height:844});await page.goto(base+'/register');await page.locator('form').waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:'/downloads/school-application-mobile.png',fullPage:true});await page.getByRole('button',{name:'Submit Application'}).scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/school-application-mobile-controls.png'});console.log('PASS mobile no horizontal overflow');
+ await page.locator('footer').scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/school-footer-email-mobile.png'});
+ await page.goto(base+'/contact');await page.locator('form').waitFor();accept=false;
+ for(const [name,value]of Object.entries({fullName:'SYNTHETIC TEST ONLY',phone:'0000000000',email:'synthetic@example.invalid',message:'SYNTHETIC TEST ONLY - no real enquiry'}))await page.locator(`[name="${name}"]`).fill(value);
+ await page.getByRole('combobox').click();await page.getByRole('option').first().click();await page.getByRole('button',{name:/Send Message/}).click();await page.getByText('Delivery not confirmed',{exact:true}).waitFor();assert.equal(await page.locator('input[name=fullName]').inputValue(),'SYNTHETIC TEST ONLY');await page.screenshot({path:'/downloads/school-contact-failure-mobile.png',fullPage:true});await page.screenshot({path:'/downloads/school-contact-failure-viewport.png'});console.log('PASS contact failure preserves entries');
+ await page.getByRole('link',{name:'administrator@ntsonkothasec.school.za'}).first().scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/school-contact-email-mobile.png'});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);console.log('PASS contact email fits mobile');
+ accept=true;await page.getByRole('button',{name:/Send Message/}).click();await page.getByText('Message queued',{exact:true}).waitFor();assert.equal(await page.locator('input[name=fullName]').inputValue(),'');console.log('PASS contact queue acceptance clears fields');
+}finally{await browser.close();await new Promise(r=>server.close(r));}
