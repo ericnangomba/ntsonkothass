@@ -1,0 +1,5 @@
+---
+# STAGING ONLY. This does not publish or change the live website.
+deployment:
+  tasks:
+    - /bin/bash hosting/cpanel/check-environment.sh
