@@ -1,0 +1,12 @@
+// Local-only default build check. Never sends an application.
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const root=path.resolve('artifacts/ntsonkotha-website/dist');
+const server=createServer(async(req,res)=>{try{let f=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!f.startsWith(root))throw Error();if(!path.extname(f))f=path.join(root,'index.html');res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css'})[path.extname(f)]||'application/octet-stream');res.end(await readFile(f));}catch{res.statusCode=404;res.end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const base=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+try{const page=await browser.newPage({viewport:{width:390,height:844}});let apiCalls=0;await page.route('**/*',r=>{const u=r.request().url();if(u.includes('/api/'))apiCalls++;return u.startsWith(base)?r.continue():r.abort();});await page.goto(base+'/register');await page.getByText('Online applications are not accepting submissions.',{exact:false}).waitFor();assert.equal(await page.locator('fieldset').evaluate(el=>el.disabled),true);assert.equal(await page.locator('input[type=file]').first().isDisabled(),true);assert.equal(await page.getByRole('button',{name:'Online Applications Disabled',exact:true}).isDisabled(),true);await page.getByRole('status').filter({hasText:'Online applications are not accepting submissions.'}).scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/school-intake-disabled-notice-mobile.png'});await page.getByRole('button',{name:'Online Applications Disabled',exact:true}).scrollIntoViewIfNeeded();await page.screenshot({path:'/downloads/school-intake-disabled-controls-mobile.png'});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(apiCalls,0);await page.goto(base+'/contact');assert.equal(await page.locator('input[name=fullName]').isEnabled(),true);assert.equal(await page.getByRole('button',{name:/Send Message/}).isEnabled(),true);console.log('PASS default intake disabled, files disabled, notice present, no API traffic, contact not disabled, mobile no overflow');}finally{await browser.close();await new Promise(r=>server.close(r));}
