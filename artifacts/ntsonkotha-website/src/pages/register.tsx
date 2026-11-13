@@ -369,42 +369,19 @@ export default function Register() {
                         <p>We the undersigned Hereby grant permission for my /our child/ward to go on any educational tour or outing or sport activity organized by the school, for the duration of my/our child’s/ward’s attendance at school. I/We fully realize and accept that all such tours, outings or activities will be undertaken at my child’s/ward’s own risk and I/We undertake to exempt, indemnify and acquit the Governing Body, the Principal and the Staff of the school, Eastern Cape Department of Education, on behalf of myself, my husband/wife and my child/ward, as mentioned, of any claims whatsoever in connection with any loss or damage of the property of the said child/ward or of any injury of the person of the said child during any such tour, outing or activity.</p>
                       </div>
                       <div className="space-y-2">
-                        <p className="text-xs text-foreground/60 italic">The school's form closes with the following signature section:</p>
-                        <div className="overflow-x-auto">
-                          <table className="w-full min-w-[36rem] border-collapse text-sm text-foreground/80">
-                            <thead>
-                              <tr>
-                                <th className="border border-white/10 p-2 text-left font-semibold"></th>
-                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Father</th>
-                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Mother</th>
-                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Legal Guardian</th>
-                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Learner</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th className="border border-white/10 p-2 text-left font-semibold">Surname &amp; Initials</th>
-                                <td className="border border-white/10 p-2 h-10"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                              </tr>
-                              <tr>
-                                <th className="border border-white/10 p-2 text-left font-semibold">ID No</th>
-                                <td className="border border-white/10 p-2 h-10"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                              </tr>
-                              <tr>
-                                <th className="border border-white/10 p-2 text-left font-semibold">Signature and Date</th>
-                                <td className="border border-white/10 p-2 h-10"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                                <td className="border border-white/10 p-2"></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                        <p className="text-xs text-foreground/60 italic">The school's form closes with the following signature section. Whether a signed copy is needed for online applications is still being confirmed with the school.</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-foreground/80">
+                          {["Father", "Mother", "Legal Guardian", "Learner"].map((role) => (
+                            <div key={role} className="border border-white/10 rounded-lg p-3 space-y-3">
+                              <p className="font-semibold uppercase tracking-wide text-foreground">{role}</p>
+                              {["Surname & Initials", "ID No", "Signature and Date"].map((label) => (
+                                <div key={label} className="space-y-1">
+                                  <p className="text-xs text-foreground/60">{label}</p>
+                                  <div className="border-b border-white/20 h-6"></div>
+                                </div>
+                              ))}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
