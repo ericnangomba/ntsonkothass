@@ -10,8 +10,8 @@ rejects(fn()=>school_fields('contact',array_replace($contact,['fullName'=>['arra
 rejects(fn()=>school_fields('contact',array_replace($contact,['message'=>'short'])), 'short message rejected');
 $app=array_fill_keys(['firstName','lastName','nationality','homeLanguage','address','postalCode','cellNumber','guardianName','guardianPhone','relationship','currentSchool','currentGrade'],'SYNTHETIC TEST ONLY');
 $app=array_replace($app,['cellNumber'=>'0000000000','guardianPhone'=>'0000000000']);
-$app+=['dob'=>'2010-01-01','gender'=>'female','idNumber'=>'0000000000000','gradeApplying'=>'Grade 8','termApplying'=>'Term 1','yearApplying'=>'2027','boardingType'=>'day','adultSubmitter'=>'true','confirmTrue'=>'true','agreeCode'=>'true'];
-check(school_fields('application',$app)['gradeApplying']==='Grade 8','application enums match UI');
+$app+=['dob'=>'2010-01-01','gender'=>'female','idNumber'=>'0000000000000','gradeApplying'=>'Grade 8','termApplying'=>'Term 1','yearApplying'=>'2027','boardingType'=>'day','adultSubmitter'=>'true','confirmTrue'=>'true'];
+check(school_fields('application',$app)['gradeApplying']==='Grade 8','application validates without unavailable policy agreement');
 foreach (['dob'=>'2026-02-30','gradeApplying'=>'Grade 99','idNumber'=>'x','adultSubmitter'=>'false','confirmTrue'=>'false'] as $key=>$value) rejects(fn()=>school_fields('application',array_replace($app,[$key=>$value])),'invalid '.$key);
 $tmp=tempnam(sys_get_temp_dir(),'synthetic-');file_put_contents($tmp,"%PDF-1.4\nSYNTHETIC TEST ONLY\n%%EOF\n");
 $file=['error'=>0,'size'=>filesize($tmp),'tmp_name'=>$tmp,'name'=>"attacker\r\nname.pdf"];
