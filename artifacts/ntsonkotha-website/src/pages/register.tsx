@@ -352,10 +352,64 @@ export default function Register() {
                   {/* Section 5 */}
                   <div className="space-y-6">
                     <div className="border-b border-primary/30 pb-2">
-                      <h3 className="text-xl font-bold text-primary uppercase tracking-wider">5. Declaration</h3>
+                      <h3 className="text-xl font-bold text-primary uppercase tracking-wider">5. Declaration and Indemnity</h3>
                     </div>
                     <p className="text-sm text-foreground/80 leading-relaxed">The <Link href="/privacy" className="text-primary underline font-semibold">application privacy notice</Link> explains the proposed handling of this application. These declarations do not replace the school's lawful processing basis or verification of the submitter's authority.</p>
-                    
+
+                    {/* School's standard Declaration and Indemnity. Wording supplied by the owner from the
+                        school's application form on 2026-11-13 with the instruction to keep it; keep verbatim. */}
+                    <div className="p-4 sm:p-6 border border-white/5 rounded-lg bg-background space-y-4">
+                      <div className="space-y-3 text-sm text-foreground/80 leading-relaxed">
+                        <p>I/We the undersigned who are parent/s/ legal Guardian/s of the applicant named on page 2 of this application hereby declare that the particulars, as furnished above are to the best of my / our knowledge correct.</p>
+                        <p>I/ We accept liability for the payment of the School Fees, as determined by the School Governing Body and understand that the school has the legal right to enforce the payment of such Fees. We also accept liability for any additional charges that the school may incur in collecting the fees.</p>
+                        <p>I/We acknowledge, accept and agree to abide by all school policies, school rules and regulations and prescribed code of conduct.</p>
+                      </div>
+                      <div className="space-y-3 text-sm text-foreground/80 leading-relaxed">
+                        <h4 className="text-base font-bold text-foreground">Indemnity</h4>
+                        <p>We the undersigned Hereby grant permission for my /our child/ward to go on any educational tour or outing or sport activity organized by the school, for the duration of my/our child’s/ward’s attendance at school. I/We fully realize and accept that all such tours, outings or activities will be undertaken at my child’s/ward’s own risk and I/We undertake to exempt, indemnify and acquit the Governing Body, the Principal and the Staff of the school, Eastern Cape Department of Education, on behalf of myself, my husband/wife and my child/ward, as mentioned, of any claims whatsoever in connection with any loss or damage of the property of the said child/ward or of any injury of the person of the said child during any such tour, outing or activity.</p>
+                      </div>
+                      <div className="space-y-2">
+                        <p className="text-xs text-foreground/60 italic">The school's form closes with the following signature section:</p>
+                        <div className="overflow-x-auto">
+                          <table className="w-full min-w-[36rem] border-collapse text-sm text-foreground/80">
+                            <thead>
+                              <tr>
+                                <th className="border border-white/10 p-2 text-left font-semibold"></th>
+                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Father</th>
+                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Mother</th>
+                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Legal Guardian</th>
+                                <th className="border border-white/10 p-2 text-left font-semibold uppercase">Learner</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th className="border border-white/10 p-2 text-left font-semibold">Surname &amp; Initials</th>
+                                <td className="border border-white/10 p-2 h-10"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                              </tr>
+                              <tr>
+                                <th className="border border-white/10 p-2 text-left font-semibold">ID No</th>
+                                <td className="border border-white/10 p-2 h-10"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                              </tr>
+                              <tr>
+                                <th className="border border-white/10 p-2 text-left font-semibold">Signature and Date</th>
+                                <td className="border border-white/10 p-2 h-10"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                                <td className="border border-white/10 p-2"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-foreground/60 italic leading-relaxed">Note: this is the school's standard wording from its application form. On the printed form the applicant is named on page 2; in this online form the learner is named in Section 1 (Personal Information) above.</p>
+
                     <FormField control={form.control} name="adultSubmitter" render={({ field }) => (
                       <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-white/5 rounded-lg bg-background">
                         <FormControl>
