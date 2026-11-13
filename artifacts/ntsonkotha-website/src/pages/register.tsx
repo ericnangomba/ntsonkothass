@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "wouter";
 import { INTAKE_YEAR, SCHOOL_TERMS } from "@/lib/school-calendar";
 import { submitApplication } from "@/lib/application-delivery";
 import { motion } from "framer-motion";
@@ -166,9 +167,10 @@ export default function Register() {
               <p className="text-sm text-foreground/80 mb-6">A parent, guardian or authorised adult must complete and submit this application on the learner's behalf.</p>
               {!applicationsEnabled && (
                 <div role="status" className="mb-6 rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
-                  Online applications are not accepting submissions. Please do not enter personal details or upload documents. The school must approve its application privacy, retention and deletion arrangements before online intake is enabled. Contact the administrator for application arrangements.
+                  Online applications are not accepting submissions. Please do not enter personal details or upload documents. The school is completing its application handling arrangements and secure delivery checks before launch. Contact the administrator for application arrangements.
                 </div>
               )}
+              <p className="text-sm text-foreground/80 mb-6 leading-relaxed">Before entering any details, read the <Link href="/privacy" className="text-primary underline font-semibold">application privacy notice</Link> for the information requested, receiving mailboxes, retention, your rights and the school request route. Online collection will open only after the launch checks are complete.</p>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <fieldset disabled={!applicationsEnabled} className="min-w-0 w-full space-y-12">
@@ -184,7 +186,7 @@ export default function Register() {
                         <FormItem><FormLabel>First Name</FormLabel><FormControl><Input className="bg-background" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="middleName" render={({ field }) => (
-                        <FormItem><FormLabel>Middle Name</FormLabel><FormControl><Input className="bg-background" {...field} /></FormControl><FormMessage /></FormItem>
+                        <FormItem><FormLabel>Middle Name (optional)</FormLabel><FormControl><Input className="bg-background" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="lastName" render={({ field }) => (
                         <FormItem><FormLabel>Last Name</FormLabel><FormControl><Input className="bg-background" {...field} /></FormControl><FormMessage /></FormItem>
@@ -336,11 +338,11 @@ export default function Register() {
                     </div>
                     <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 space-y-4">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-foreground">Birth Certificate / ID</label>
+                        <label className="text-sm font-medium text-foreground">Birth Certificate / ID (optional upload)</label>
                         <Input ref={identityFile} type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-foreground">Latest Report Card</label>
+                        <label className="text-sm font-medium text-foreground">Latest Report Card (optional upload)</label>
                         <Input ref={reportFile} type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
                       </div>
                       <p className="text-xs text-foreground/60 italic mt-2">* Acceptable formats: PDF, JPG, PNG. Max 5MB per file.</p>
@@ -352,6 +354,7 @@ export default function Register() {
                     <div className="border-b border-primary/30 pb-2">
                       <h3 className="text-xl font-bold text-primary uppercase tracking-wider">5. Declaration</h3>
                     </div>
+                    <p className="text-sm text-foreground/80 leading-relaxed">The <Link href="/privacy" className="text-primary underline font-semibold">application privacy notice</Link> explains the proposed handling of this application. These declarations do not replace the school's lawful processing basis or verification of the submitter's authority.</p>
                     
                     <FormField control={form.control} name="adultSubmitter" render={({ field }) => (
                       <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-white/5 rounded-lg bg-background">
