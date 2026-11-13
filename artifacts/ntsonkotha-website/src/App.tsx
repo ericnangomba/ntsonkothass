@@ -13,6 +13,7 @@ const Academics = lazy(() => import("@/pages/academics"));
 const CampusLife = lazy(() => import("@/pages/campus-life"));
 const Admissions = lazy(() => import("@/pages/admissions"));
 const Contact = lazy(() => import("@/pages/contact"));
+const Privacy = lazy(() => import("@/pages/privacy"));
 const Register = lazy(() => import("@/pages/register"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/admissions" component={Admissions} />
       <Route path="/contact" component={Contact} />
       <Route path="/register" component={Register} />
+      <Route path="/privacy" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
   );
