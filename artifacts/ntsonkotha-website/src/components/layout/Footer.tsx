@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { INTAKE_YEAR } from "@/lib/school-calendar";
 import { Mail, MapPin, Phone } from "lucide-react";
 import logoUrl from "@assets/ntsonkotha-senior-secondary-school_1779883577719.png";
 
@@ -45,7 +46,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/register" className="text-foreground/80 hover:text-primary transition-colors text-xs md:text-sm font-medium flex items-center gap-2 justify-center sm:justify-start">
-                  Apply Now <span className="bg-accent text-white text-[9px] md:text-[10px] px-2 py-0.5 rounded font-bold">OPEN</span>
+                  Application Form <span className="bg-accent text-white text-[9px] md:text-[10px] px-2 py-0.5 rounded font-bold">{INTAKE_YEAR}</span>
                 </Link>
               </li>
             </ul>
