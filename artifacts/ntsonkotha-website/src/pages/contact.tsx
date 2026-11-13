@@ -122,9 +122,10 @@ export default function Contact() {
                 <Phone className="w-8 h-8 text-primary" />
               </div>
               <h3 className="font-bold text-white text-xl mb-4">Contact Numbers</h3>
-              <p className="text-foreground/70 leading-relaxed">
-                Primary: +27 66 008 7077
-              </p>
+              <div className="text-foreground/70 leading-relaxed space-y-1">
+                <a href="tel:+27660087077" className="block hover:underline">+27 66 008 7077</a>
+                <a href="tel:+27871600951" className="block hover:underline">+27 87 160 0951</a>
+              </div>
               <div className="mt-4 flex items-center gap-2 text-sm text-primary font-medium">
                 <Mail className="w-4 h-4 shrink-0" /> <a href="mailto:administrator@ntsonkothasec.school.za" className="min-w-0 break-all hover:underline">administrator@ntsonkothasec.school.za</a>
               </div>
