@@ -87,8 +87,9 @@ export default function Footer() {
           <p className="text-xs text-foreground/50">
             &copy; {new Date().getFullYear()} Ntsonkotha Senior Secondary School. All rights reserved.
           </p>
-          <div className="flex items-center gap-4 text-xs text-foreground/50">
+          <div className="flex flex-wrap justify-center items-center gap-4 text-xs text-foreground/50">
             <Link href="/contact" className="hover:text-primary transition-colors">Contact Directory</Link>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Application Privacy</Link>
             <span>•</span>
             <span>Eastern Cape Department of Education</span>
           </div>
