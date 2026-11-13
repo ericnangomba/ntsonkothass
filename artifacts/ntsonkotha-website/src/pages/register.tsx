@@ -30,6 +30,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import heroImg from "@assets/unnamed_(2)_1779883577720.jpg";
 
+// Enable only after school privacy/retention approval and secure release checks.
+const applicationsEnabled = import.meta.env.VITE_APPLICATIONS_ENABLED === "true";
+
 const formSchema = z.object({
   // Section 1
   firstName: z.string().min(2, "Required"),
@@ -62,7 +65,6 @@ const formSchema = z.object({
   // Section 5
   adultSubmitter: z.boolean().refine(val => val === true, { message: "An authorised adult must submit this application" }),
   confirmTrue: z.boolean().refine(val => val === true, { message: "You must confirm this" }),
-  agreeCode: z.boolean().refine(val => val === true, { message: "You must agree to the policy" }),
 });
 
 export default function Register() {
@@ -93,11 +95,11 @@ export default function Register() {
       yearApplying: INTAKE_YEAR,
       adultSubmitter: false,
       confirmTrue: false,
-      agreeCode: false,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!applicationsEnabled) return;
     try {
       await submitApplication({
         endpoint: import.meta.env.VITE_APPLICATION_ENDPOINT || "",
@@ -162,8 +164,14 @@ export default function Register() {
 
             <div className="p-6 md:p-10">
               <p className="text-sm text-foreground/80 mb-6">A parent, guardian or authorised adult must complete and submit this application on the learner's behalf.</p>
+              {!applicationsEnabled && (
+                <div role="status" className="mb-6 rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
+                  Online applications are not accepting submissions. Please do not enter personal details or upload documents. The school must approve its application privacy, retention and deletion arrangements before online intake is enabled. Contact the administrator for application arrangements.
+                </div>
+              )}
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                  <fieldset disabled={!applicationsEnabled} className="min-w-0 w-full space-y-12">
                   
                   {/* Section 1 */}
                   <div className="space-y-6">
@@ -368,21 +376,12 @@ export default function Register() {
                       </FormItem>
                     )} />
 
-                    <FormField control={form.control} name="agreeCode" render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-white/5 rounded-lg bg-background">
-                        <FormControl>
-                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>I agree to the school's Code of Conduct and Discipline Policy.</FormLabel>
-                        </div>
-                      </FormItem>
-                    )} />
                   </div>
 
-                  <Button type="submit" disabled={form.formState.isSubmitting} size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-black uppercase tracking-widest h-16 text-lg">
-                    {form.formState.isSubmitting ? "Sending..." : "Submit Application"}
+                  <Button type="submit" disabled={!applicationsEnabled || form.formState.isSubmitting} size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-black uppercase tracking-widest h-16 text-sm sm:text-lg whitespace-normal px-4">
+                    {!applicationsEnabled ? "Online Applications Disabled" : form.formState.isSubmitting ? "Sending..." : "Submit Application"}
                   </Button>
+                  </fieldset>
                 </form>
               </Form>
             </div>
