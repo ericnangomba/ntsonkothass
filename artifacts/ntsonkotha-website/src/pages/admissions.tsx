@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { CALENDAR_SOURCE, INTAKE_YEAR, SCHOOL_TERMS } from "@/lib/school-calendar";
 import { motion } from "framer-motion";
 import { CheckCircle2, FileText, CalendarHeart, GraduationCap, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -49,7 +50,7 @@ export default function Admissions() {
               
               <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-white/10">
                 {[
-                  { title: "Submit Application", desc: "Applications open annually from April to October for the following academic year.", icon: FileText },
+                  { title: "Submit Application", desc: "The application form is for the 2027 intake. Contact the school to confirm opening and closing dates and whether applications are currently being accepted.", icon: FileText },
                   { title: "Provide Documentation", desc: "Submit all required certified documents to the administration office.", icon: CheckCircle2 },
                   { title: "Assessment & Placement", desc: "Review of academic history and boarding capacity availability.", icon: GraduationCap },
                   { title: "Confirmation of Admission", desc: "Successful candidates receive formal notification and orientation details.", icon: CalendarHeart }
@@ -75,6 +76,22 @@ export default function Admissions() {
             {/* Sidebar */}
             <div className="lg:col-span-5 space-y-12">
               
+              <div className="bg-card p-6 sm:p-8 rounded-xl border-t-4 border-primary shadow-xl">
+                <h3 className="text-2xl font-serif font-bold text-white mb-4">{INTAKE_YEAR} School Calendar</h3>
+                <p className="text-sm text-foreground/70 mb-4">Public-school learner term dates for Eastern Cape.</p>
+                <dl className="space-y-3 text-sm">
+                  {SCHOOL_TERMS.map(term => (
+                    <div key={term.name} className="flex flex-wrap justify-between gap-x-4 gap-y-1">
+                      <dt className="font-bold text-white">{term.name}</dt>
+                      <dd className="text-foreground/80">{term.dates}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="text-sm text-foreground/70 mt-4">Educators return on 11 January and close on 10 December. 26 April is a special school holiday; public holidays are not teaching days.</p>
+                <a href={CALENDAR_SOURCE} target="_blank" rel="noopener noreferrer" className="inline-block text-sm text-primary underline mt-4">Official 2027 public-school calendar (PDF)</a>
+                <p className="text-sm text-foreground/70 mt-4">Term dates do not set the school's application opening or closing dates. Confirm application arrangements with the administrator.</p>
+              </div>
+
               {/* Checklist */}
               <div className="bg-card p-8 rounded-xl border-t-4 border-primary shadow-xl">
                 <h3 className="text-2xl font-serif font-bold text-white mb-6">Required Documents</h3>
