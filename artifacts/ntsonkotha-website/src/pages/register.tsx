@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { submitApplication } from "@/lib/application-delivery";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -57,12 +59,15 @@ const formSchema = z.object({
   boardingType: z.enum(["day", "boarding"], { required_error: "Required" }),
 
   // Section 5
+  adultSubmitter: z.boolean().refine(val => val === true, { message: "An authorised adult must submit this application" }),
   confirmTrue: z.boolean().refine(val => val === true, { message: "You must confirm this" }),
   agreeCode: z.boolean().refine(val => val === true, { message: "You must agree to the policy" }),
 });
 
 export default function Register() {
   const { toast } = useToast();
+  const identityFile = useRef<HTMLInputElement>(null);
+  const reportFile = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,19 +90,38 @@ export default function Register() {
       currentSchool: "",
       currentGrade: "",
       yearApplying: "2026",
+      adultSubmitter: false,
       confirmTrue: false,
       agreeCode: false,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Application Submitted Successfully",
-      description: "Your application has been received. We will contact you within 5 business days.",
-      className: "bg-primary text-primary-foreground border-none font-bold",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await submitApplication({
+        endpoint: import.meta.env.VITE_APPLICATION_ENDPOINT || "",
+        pageUrl: window.location.href,
+        values,
+        files: {
+          identityDocument: identityFile.current?.files?.[0],
+          reportCard: reportFile.current?.files?.[0],
+        },
+      });
+      toast({
+        title: "Application queued",
+        description: "The school's mail system accepted your application for delivery. This is not confirmation of inbox receipt or admission.",
+        className: "bg-primary text-primary-foreground border-none font-bold",
+      });
+      form.reset();
+      if (identityFile.current) identityFile.current.value = "";
+      if (reportFile.current) reportFile.current.value = "";
+    } catch (error) {
+      toast({
+        title: "Delivery not confirmed",
+        description: error instanceof Error ? error.message : "Please try again later. Your entries have not been cleared.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -136,6 +160,7 @@ export default function Register() {
             </div>
 
             <div className="p-6 md:p-10">
+              <p className="text-sm text-foreground/80 mb-6">A parent, guardian or authorised adult must complete and submit this application on the learner's behalf.</p>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
                   
@@ -165,7 +190,7 @@ export default function Register() {
                         <FormItem className="space-y-3">
                           <FormLabel>Gender</FormLabel>
                           <FormControl>
-                            <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4">
+                            <RadioGroup onValueChange={field.onChange} value={field.value || ""} className="flex gap-4">
                               <FormItem className="flex items-center space-x-2 space-y-0">
                                 <FormControl><RadioGroupItem value="male" /></FormControl><FormLabel className="font-normal">Male</FormLabel>
                               </FormItem>
@@ -251,7 +276,7 @@ export default function Register() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <FormField control={form.control} name="gradeApplying" render={({ field }) => (
                         <FormItem><FormLabel>Grade Applying For</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select onValueChange={field.onChange} value={field.value || ""}>
                             <FormControl><SelectTrigger className="bg-background"><SelectValue placeholder="Select Grade" /></SelectTrigger></FormControl>
                             <SelectContent>
                               {["Grade 8", "Grade 9", "Grade 10", "Grade 11 (Special Cases)"].map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
@@ -262,7 +287,7 @@ export default function Register() {
                       )} />
                       <FormField control={form.control} name="termApplying" render={({ field }) => (
                         <FormItem><FormLabel>Term Applying For</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select onValueChange={field.onChange} value={field.value || ""}>
                             <FormControl><SelectTrigger className="bg-background"><SelectValue placeholder="Select Term" /></SelectTrigger></FormControl>
                             <SelectContent>
                               {["Term 1", "Term 2", "Term 3", "Term 4"].map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
@@ -280,7 +305,7 @@ export default function Register() {
                       <FormItem className="space-y-3">
                         <FormLabel>Boarding Status</FormLabel>
                         <FormControl>
-                          <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-6">
+                          <RadioGroup onValueChange={field.onChange} value={field.value || ""} className="flex gap-6">
                             <FormItem className="flex items-center space-x-2 space-y-0">
                               <FormControl><RadioGroupItem value="day" /></FormControl><FormLabel className="font-normal">Day Learner</FormLabel>
                             </FormItem>
@@ -302,11 +327,11 @@ export default function Register() {
                     <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 space-y-4">
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-foreground">Birth Certificate / ID</label>
-                        <Input type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
+                        <Input ref={identityFile} type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-foreground">Latest Report Card</label>
-                        <Input type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
+                        <Input ref={reportFile} type="file" className="bg-background cursor-pointer" accept=".pdf,.jpg,.jpeg,.png" />
                       </div>
                       <p className="text-xs text-foreground/60 italic mt-2">* Acceptable formats: PDF, JPG, PNG. Max 5MB per file.</p>
                     </div>
@@ -318,6 +343,18 @@ export default function Register() {
                       <h3 className="text-xl font-bold text-primary uppercase tracking-wider">5. Declaration</h3>
                     </div>
                     
+                    <FormField control={form.control} name="adultSubmitter" render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-white/5 rounded-lg bg-background">
+                        <FormControl>
+                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>I am a parent, guardian or authorised adult submitting on the learner's behalf.</FormLabel>
+                          <FormMessage />
+                        </div>
+                      </FormItem>
+                    )} />
+
                     <FormField control={form.control} name="confirmTrue" render={({ field }) => (
                       <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-white/5 rounded-lg bg-background">
                         <FormControl>
@@ -341,8 +378,8 @@ export default function Register() {
                     )} />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-black uppercase tracking-widest h-16 text-lg">
-                    Submit Application
+                  <Button type="submit" disabled={form.formState.isSubmitting} size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-black uppercase tracking-widest h-16 text-lg">
+                    {form.formState.isSubmitting ? "Sending..." : "Submit Application"}
                   </Button>
                 </form>
               </Form>
