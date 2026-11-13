@@ -71,8 +71,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 md:gap-3 justify-center sm:justify-start">
                 <Mail className="h-4 w-4 md:h-5 md:w-5 text-accent shrink-0" />
-                <a href="mailto:ntsonkothaschool@gmail.com" className="text-xs md:text-sm text-foreground/80 hover:text-primary transition-colors">
-                  ntsonkothaschool@gmail.com
+                <a href="mailto:administrator@ntsonkothasec.school.za" className="min-w-0 break-all text-xs md:text-sm text-foreground/80 hover:text-primary transition-colors">
+                  administrator@ntsonkothasec.school.za
                 </a>
               </li>
             </ul>
