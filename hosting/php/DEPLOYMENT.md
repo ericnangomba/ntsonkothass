@@ -21,8 +21,11 @@ Source updates to master must use [skip netlify] until a release route is approv
 1. Resolve public DNS and trusted HTTPS with Afrihost. Verify apex and www from
    independent public resolvers and a normal browser. Do not collect real learner
    data over HTTP or self-signed HTTPS.
-2. Resolve school-approved intake/privacy and retention text, and the actual
-   conduct/discipline policy currently referenced. Adult submission is required.
+2. School-owned handover item: approve application privacy/intake wording and how
+   long applications, attachments and both mailbox copies are kept and deleted. No
+   retention period is invented. Real application intake must stay disabled until
+   the school settles this and secure release checks pass. Adult submission remains
+   required; the unavailable conduct/discipline agreement checkbox is removed.
 3. Keep the handler disabled until secure deployment is ready. The prior isolated
    test verified local administrator-sender delivery to both school inboxes. The
    normal production template and frontend still need an approved release check.
@@ -34,7 +37,7 @@ Source updates to master must use [skip netlify] until a release route is approv
    "School enquiry <reference>". Body enumerates validated fields. A preliminary
    plain-language test proposal must not be mistaken for exact rendered output.
 
-## Backup and staging plan (no remote writes have happened)
+## Backup and staging plan (live release still pending)
 
 - Re-read current repo HEAD and remote document root before touching either.
 - Download a timestamped full backup of public_html including hidden .htaccess and
@@ -104,13 +107,14 @@ Do not repeat or send a new test without the owner's approval.
 
 ## Source preservation without deployment
 
-Save changes to the existing master production source branch as requested. Include
+Finish and test remaining changes before the next batched master update, as the
+owner requested. Do not revert already-saved forms/calendar commits. Include
 [skip netlify] in every commit message so Netlify does not build or deploy them.
 Do not create a separate branch or pull request. Preserve remote changes and never
-force-push. No Afrihost repository or automatic live deployment is configured yet.
+force-push. A nonpublic Afrihost Git clone exists. Automatic live deployment is not configured.
 
-The host exposes cPanel Git Version Control, but its current warning says shell
-access must be enabled by the system administrator to view clone URLs. Standard
+The host reports jailed shell enabled. Both private staging runner attempts still
+failed with exit255 and no diagnostic output; the build path is not verified. Standard
 GitHub-clone pull deployment requires Update from Remote, then Deploy HEAD Commit.
 Automatic cPanel deployment listens to pushes to the cPanel-managed repository,
 not GitHub alone. Verify build tools and a secure automation path before enabling
@@ -119,5 +123,18 @@ push-to-live. Do not install an unverified plugin or public unauthenticated hook
 The owner confirmed that a parent, guardian or authorised adult must submit on the
 learner's behalf. The form requires that declaration on frontend and backend; it
 cannot verify the submitter's identity or authority. Public email is administrator,
-and both application and contact messages copy principal. School retention text,
-the actual referenced policy and admissions year/window still need confirmation.
+and both application and contact messages copy principal. Intake year is2027, with gazetted learner term dates. Admissions opening/closing
+dates and current acceptance remain unconfirmed. School privacy/retention/deletion
+arrangements remain an explicit handover item, not permission to collect records.
+
+## Application-intake gate and handover responsibility
+
+The rest of the site and contact enquiries can be prepared independently. Default
+application UI has disabled controls, document inputs and Submit, with an explicit
+no-personal-data notice. VITE_APPLICATIONS_ENABLED must remain unset/false for a
+normal build. The private PHP config has application_enabled=false independently
+of the shared enabled setting, so enabling contact cannot silently enable intake.
+Do not switch either application gate on until school privacy/retention/deletion
+approval, admissions arrangements and secure release verification are recorded.
+Local tests may enable gates only against mocked or loopback capture endpoints.
+No new real/synthetic external mail is authorized by those tests.
