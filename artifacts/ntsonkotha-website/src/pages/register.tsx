@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { INTAKE_YEAR, SCHOOL_TERMS } from "@/lib/school-calendar";
 import { submitApplication } from "@/lib/application-delivery";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -55,7 +56,7 @@ const formSchema = z.object({
   currentGrade: z.string().min(1, "Required"),
   gradeApplying: z.string({ required_error: "Required" }),
   termApplying: z.string({ required_error: "Required" }),
-  yearApplying: z.string().min(4, "Required"),
+  yearApplying: z.literal(INTAKE_YEAR),
   boardingType: z.enum(["day", "boarding"], { required_error: "Required" }),
 
   // Section 5
@@ -89,7 +90,7 @@ export default function Register() {
       relationship: "",
       currentSchool: "",
       currentGrade: "",
-      yearApplying: "2026",
+      yearApplying: INTAKE_YEAR,
       adultSubmitter: false,
       confirmTrue: false,
       agreeCode: false,
@@ -290,16 +291,17 @@ export default function Register() {
                           <Select onValueChange={field.onChange} value={field.value || ""}>
                             <FormControl><SelectTrigger className="bg-background"><SelectValue placeholder="Select Term" /></SelectTrigger></FormControl>
                             <SelectContent>
-                              {["Term 1", "Term 2", "Term 3", "Term 4"].map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                              {SCHOOL_TERMS.map(t => <SelectItem key={t.name} value={t.name}>{t.name}: {t.dates}</SelectItem>)}
                             </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="yearApplying" render={({ field }) => (
-                        <FormItem><FormLabel>Academic Year</FormLabel><FormControl><Input className="bg-background" {...field} /></FormControl><FormMessage /></FormItem>
+                        <FormItem><FormLabel>Academic Year</FormLabel><FormControl><Input className="bg-background" readOnly {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                     </div>
+                    <p className="text-sm text-foreground/70">Learner term dates are for {INTAKE_YEAR}. Check <a href="/admissions" className="text-primary underline">school term dates and application arrangements</a> before applying.</p>
 
                     <FormField control={form.control} name="boardingType" render={({ field }) => (
                       <FormItem className="space-y-3">
