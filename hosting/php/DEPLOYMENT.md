@@ -138,3 +138,42 @@ Do not switch either application gate on until school privacy/retention/deletion
 approval, admissions arrangements and secure release verification are recorded.
 Local tests may enable gates only against mocked or loopback capture endpoints.
 No new real/synthetic external mail is authorized by those tests.
+
+## Revised outcome and privacy preparation (13 November 2026)
+
+The owner clarified the final outcome is OPEN online applications after secure
+readiness, deployment and handover, not permanently disabled intake. Both gates
+remain off during preparation. The /privacy route and pre-entry/footer links are
+prepared locally; they are not a claim that collection is ready. The principal
+request responsibility via the administrator mailbox is the prospective arrangement
+prepared after the owner's proceed, not evidence about historical practice.
+
+The signed25June2026 ECDoE privacy notice supplies structure, not school facts:
+https://www.ecdoe.gov.za/assets/docs/paia-popia/ECDoE-POPIA-Privacy-Notice.pdf
+Do not transplant Department officer/contact/security/foreign-transfer claims.
+POPIA14 retention is purpose-based, with prescribed/decision-access periods and
+lawful holds respected; no invented year count. School must settle applicable
+records criteria/disposal owner and lawful child-processing ground/authority.
+Do not add a checkbox that pretends general adult status proves competent-person
+authority, or that notice acknowledgement alone establishes consent.
+
+Before final publication, replace preparation wording together with actual launch
+configuration only after the school facts and host checks below are settled.
+- School: responsible identity/role, admissions access and onward recipients,
+  necessary fields/documents and alternative route, child-processing basis and
+  authority, records criteria/holds and disposal responsibility, intake dates.
+- Technical: host/upload temp lifecycle, sessions/access logs, mail queues, both
+  mailbox copies/deleted folders/downloads, backup expiry/restore/delete handling,
+  processing locations and applicable safeguards/contract terms. No immediate
+  all-copy deletion or South-Africa-only promise without verification.
+- Release: runner/build/rollback, DNS and trusted HTTPS, same-origin endpoint and
+  secure cookies, independently enabled contact/application flags and verified
+  sender, delivery checks within explicit no-new-external-test authority.
+
+Afrihost's current shared-hosting FAQ describes an infrastructure role, not an
+already-established dedicated-managed application DPA. General terms16.4 permit
+possible Client Data backups up to one year AFTER termination, which is not the
+school retention rule or a confirmed live backup interval. Verify actual package
+and technical handling rather than copying account privacy terms into this notice.
+https://help.afrihost.com/entry/hosting-data-protection-compliance-faqs/
+https://www.afrihost.com/terms-and-conditions/general
