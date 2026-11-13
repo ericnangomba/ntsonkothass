@@ -127,6 +127,17 @@ and both application and contact messages copy principal. Intake year is2027, wi
 dates and current acceptance remain unconfirmed. School privacy/retention/deletion
 arrangements remain an explicit handover item, not permission to collect records.
 
+Form section 5 displays the school's standard Declaration and Indemnity verbatim
+(supplied by the owner from the school's application form on 2026-11-13): the fees
+liability declaration, the agreement to school policies and the prescribed code of
+conduct, the blanket educational tour/outing/sport indemnity, and the
+Father/Mother/Legal Guardian/Learner signature matrix. The printed form's "page 2"
+applicant reference is annotated beside the text, not rewritten. The online form
+captures no signatures and presents no electronic acceptance of this declaration;
+whether online submission alone suffices or a signed paper copy must follow is a
+school decision to record before launch. This supersedes the earlier removal of the
+standalone policy-agreement checkbox only within this supplied section.
+
 ## Application-intake gate and handover responsibility
 
 The rest of the site and contact enquiries can be prepared independently. Default
