@@ -8,7 +8,7 @@ with tempfile.TemporaryDirectory(prefix='school-http-') as root:
     shutil.copy(repo/'hosting/php/public/api/forms.php',public/'api/forms.php')
     capture=root/'captured.eml'; mailcmd=root/'capture-mail.sh';mailcmd.write_text('#!/bin/sh\ncat > '+str(capture)+'\n');mailcmd.chmod(0o700)
     config=private/'config.php'
-    def configure(enabled):config.write_text("<?php return ['enabled'=>"+('true' if enabled else 'false')+",'origins'=>['https://ntsonkothasec.school.za'],'sender'=>'administrator@ntsonkothasec.school.za','state_dir'=>__DIR__.'/state','rate_key'=>'"+'k'*32+"'];")
+    def configure(enabled,applications=False):config.write_text("<?php return ['enabled'=>"+('true' if enabled else 'false')+",'application_enabled'=>"+('true' if applications else 'false')+",'origins'=>['https://ntsonkothasec.school.za'],'sender'=>'administrator@ntsonkothasec.school.za','state_dir'=>__DIR__.'/state','rate_key'=>'"+'k'*32+"'];")
     configure(False)
     router=root/'router.php';router.write_text("<?php $_SERVER['HTTPS']='on'; require __DIR__.'/public_html/api/forms.php';")
     sock=socket.socket();sock.bind(('127.0.0.1',0));port=sock.getsockname()[1];sock.close()
@@ -43,13 +43,14 @@ with tempfile.TemporaryDirectory(prefix='school-http-') as root:
         print('PASS contact accepted only into local capture, fixed To/CC')
         assert request('POST',data,token)[0]==403;print('PASS consumed CSRF prevents replay')
         token=request()[1]['token'];boundary='synthetic-boundary'
-        fields=dict(kind='application',website='',firstName='SYNTHETIC TEST ONLY',lastName='TEST ONLY',dob='2010-01-01',gender='female',idNumber='0000000000000',nationality='Test',homeLanguage='Test',address='TEST ONLY',postalCode='0000',cellNumber='0000000000',guardianName='TEST GUARDIAN',guardianPhone='0000000000',relationship='test',currentSchool='TEST ONLY',currentGrade='7',gradeApplying='Grade 8',termApplying='Term 1',yearApplying='2027',boardingType='day',adultSubmitter='true',confirmTrue='true',agreeCode='true')
+        fields=dict(kind='application',website='',firstName='SYNTHETIC TEST ONLY',lastName='TEST ONLY',dob='2010-01-01',gender='female',idNumber='0000000000000',nationality='Test',homeLanguage='Test',address='TEST ONLY',postalCode='0000',cellNumber='0000000000',guardianName='TEST GUARDIAN',guardianPhone='0000000000',relationship='test',currentSchool='TEST ONLY',currentGrade='7',gradeApplying='Grade 8',termApplying='Term 1',yearApplying='2027',boardingType='day',adultSubmitter='true',confirmTrue='true')
         pdf=(repo/'tests/fixtures/identityDocument.pdf').read_bytes()
         parts=[f'--{boundary}\r\nContent-Disposition: form-data; name="{k}"\r\n\r\n{v}\r\n'.encode() for k,v in fields.items()]
         for field in ['identityDocument','reportCard']:
             pdf=(repo/'tests/fixtures'/(field+'.pdf')).read_bytes()
             parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="{field}"; filename="synthetic.pdf"\r\nContent-Type: application/pdf\r\n\r\n'.encode()+pdf+b'\r\n')
         body=b''.join(parts)+f'--{boundary}--\r\n'.encode()
+        assert request('POST',body,token,content_type='multipart/form-data; boundary='+boundary)[0]==503;print('PASS application gate blocks intake while contact remains usable');configure(True,True)
         status,result=request('POST',body,token,content_type='multipart/form-data; boundary='+boundary);assert status==200 and result['accepted'];message=capture.read_text();assert 'identityDocument.pdf' in message and 'reportCard.pdf' in message
         from email import policy
         from email.parser import BytesParser
