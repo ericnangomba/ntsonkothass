@@ -25,6 +25,7 @@ try {
     if (!isset($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'],$_SERVER['HTTP_X_CSRF_TOKEN'] ?? '')) respond(403,['accepted'=>false]);
     if ((int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 12*1024*1024) respond(413,['accepted'=>false]);
     if (!is_string($_POST['kind'] ?? null) || !in_array($_POST['kind'],['application','contact'],true) || ($_POST['website'] ?? '') !== '') respond(422,['accepted'=>false]);
+    if ($_POST['kind'] === 'application' && ($config['application_enabled'] ?? false) !== true) respond(503,['accepted'=>false]);
     require $private.'/forms.php';
     $kind=$_POST['kind'];
     $fields=school_fields($kind,$_POST);
