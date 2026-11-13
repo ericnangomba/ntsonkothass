@@ -7,7 +7,7 @@ const SCHOOL_MAX_FILE = 5242880;
 
 function school_fields(string $kind, array $input): array {
     $required = $kind === 'application'
-        ? ['firstName','lastName','dob','gender','idNumber','nationality','homeLanguage','address','postalCode','cellNumber','guardianName','guardianPhone','relationship','currentSchool','currentGrade','gradeApplying','termApplying','yearApplying','boardingType','adultSubmitter','confirmTrue','agreeCode']
+        ? ['firstName','lastName','dob','gender','idNumber','nationality','homeLanguage','address','postalCode','cellNumber','guardianName','guardianPhone','relationship','currentSchool','currentGrade','gradeApplying','termApplying','yearApplying','boardingType','adultSubmitter','confirmTrue']
         : ['fullName','phone','email','subject','message'];
     $optional = $kind === 'application' ? ['middleName','email','guardianEmail'] : [];
     $result = [];
@@ -27,7 +27,7 @@ function school_fields(string $kind, array $input): array {
     }
     if ($kind === 'contact' && !in_array($result['subject'],['general','admissions','academics','other'],true)) throw new InvalidArgumentException('Choose a valid subject.');
     if ($kind === 'application') {
-        foreach (['adultSubmitter','confirmTrue','agreeCode'] as $key) if ($result[$key] !== 'true') throw new InvalidArgumentException('Confirm all required declarations.');
+        foreach (['adultSubmitter','confirmTrue'] as $key) if ($result[$key] !== 'true') throw new InvalidArgumentException('Confirm all required declarations.');
         foreach (['gender'=>['male','female'], 'boardingType'=>['day','boarding'], 'gradeApplying'=>['Grade 8','Grade 9','Grade 10','Grade 11 (Special Cases)'], 'termApplying'=>['Term 1','Term 2','Term 3','Term 4']] as $key=>$allowed) {
             if (!in_array($result[$key],$allowed,true)) throw new InvalidArgumentException('Choose a valid option.');
         }
