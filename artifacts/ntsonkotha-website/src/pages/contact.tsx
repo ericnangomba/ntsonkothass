@@ -1,3 +1,4 @@
+import { submitApplication } from "@/lib/application-delivery";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,30 +51,24 @@ export default function Contact() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch("http://localhost:3001/api/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+      await submitApplication({
+        endpoint: import.meta.env.VITE_APPLICATION_ENDPOINT || "",
+        kind: "contact",
+        pageUrl: window.location.href,
+        values,
+        files: {},
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to send message");
-      }
-
       toast({
-        title: "Message Sent Successfully",
-        description: "We will get back to you as soon as possible.",
+        title: "Message queued",
+        description: "The school's mail system accepted your message for delivery. This is not confirmation of inbox receipt.",
         className: "bg-primary text-primary-foreground border-none",
       });
       form.reset();
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "Delivery not confirmed",
+        description: error instanceof Error ? error.message : "Your message has not been sent. Your entries have not been cleared.",
         className: "bg-destructive text-destructive-foreground border-none",
       });
     }
@@ -131,7 +126,7 @@ export default function Contact() {
                 Primary: +27 66 008 7077
               </p>
               <div className="mt-4 flex items-center gap-2 text-sm text-primary font-medium">
-                <Mail className="w-4 h-4" /> principal.2000600642@ecschools.org.za
+                <Mail className="w-4 h-4 shrink-0" /> <a href="mailto:administrator@ntsonkothasec.school.za" className="min-w-0 break-all hover:underline">administrator@ntsonkothasec.school.za</a>
               </div>
             </div>
 
@@ -259,7 +254,7 @@ export default function Contact() {
                     )}
                   />
 
-                  <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest h-14">
+                  <Button disabled={form.formState.isSubmitting} type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest h-14">
                     Send Message
                   </Button>
                 </form>
