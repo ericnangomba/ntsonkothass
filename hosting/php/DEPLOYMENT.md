@@ -114,7 +114,15 @@ Do not create a separate branch or pull request. Preserve remote changes and nev
 force-push. A nonpublic Afrihost Git clone exists. Automatic live deployment is not configured.
 
 The host reports jailed shell enabled. Both private staging runner attempts still
-failed with exit255 and no diagnostic output; the build path is not verified. Standard
+failed with exit255 and no diagnostic output; the build path is not verified. A third
+run of `hosting/cpanel/check-environment.sh` (a read-only staging environment check
+writing a private mode-600 report, never touching public_html, dependencies or mail)
+also failed with exit255 and no report. Afrihost confirmed on ticket YYR-460-84029
+that the unguarded `/usr/local/bin/php` probe executed PHP-CGI with a CLI-only
+command and terminated the script early. The script now runs with `set -u` only and
+guards every probe so no single candidate can abort the run; non-CLI PHP candidates
+are skipped explicitly and a failing probe is recorded in the report instead of
+killing the task. Standard
 GitHub-clone pull deployment requires Update from Remote, then Deploy HEAD Commit.
 Automatic cPanel deployment listens to pushes to the cPanel-managed repository,
 not GitHub alone. Verify build tools and a secure automation path before enabling
