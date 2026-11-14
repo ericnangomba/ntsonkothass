@@ -20,6 +20,14 @@ trap 'rm -f "$tmp"' EXIT
   for node in /opt/alt/alt-nodejs*/root/usr/bin/node /usr/bin/node /usr/local/bin/node; do
     if [ -x "$node" ]; then printf 'node-candidate=%s ' "$node"; "$node" --version 2>&1 || true; fi
   done
+  for dir in /opt/alt/alt-nodejs*/root/usr/bin; do
+    for tool in npm npx pnpm corepack; do
+      if [ -x "$dir/$tool" ]; then
+        printf 'tool-candidate=%s/%s ' "$dir" "$tool"
+        (PATH="$dir:$PATH" "$dir/$tool" --version 2>&1 | head -1) || true
+      fi
+    done
+  done
   for php in /usr/local/bin/php /usr/bin/php; do
     if [ -x "$php" ]; then
       if "$php" -v 2>/dev/null | grep -qi '(cli)'; then
