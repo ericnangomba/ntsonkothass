@@ -118,8 +118,9 @@ failed with exit255 and no diagnostic output; the build path is not verified. A 
 run of `hosting/cpanel/check-environment.sh` (a read-only staging environment check
 writing a private mode-600 report, never touching public_html, dependencies or mail)
 also failed with exit255 and no report. Afrihost confirmed on ticket YYR-460-84029
-that the unguarded `/usr/local/bin/php` probe executed PHP-CGI with a CLI-only
-command and terminated the script early. The script now runs with `set -u` only and
+that an unguarded PHP probe executed a PHP-CGI binary with a CLI-only command
+and terminated the script early. The measured report later showed the CGI
+binary is /usr/bin/php; /usr/local/bin/php is PHP CLI 8.4.27. The script now runs with `set -u` only and
 guards every probe so no single candidate can abort the run; non-CLI PHP candidates
 are skipped explicitly and a failing probe is recorded in the report instead of
 killing the task. The fourth run on 14 November 2026 at 07:16 SAST succeeded
