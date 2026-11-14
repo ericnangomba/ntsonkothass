@@ -122,11 +122,32 @@ that the unguarded `/usr/local/bin/php` probe executed PHP-CGI with a CLI-only
 command and terminated the script early. The script now runs with `set -u` only and
 guards every probe so no single candidate can abort the run; non-CLI PHP candidates
 are skipped explicitly and a failing probe is recorded in the report instead of
-killing the task. Standard
+killing the task. The fourth run on 14 November 2026 at 07:16 SAST succeeded
+(exit 0, log `vc_1794633360.89573_git_deploy.log`) and wrote the report.
+Measured deployment-task environment: git, tar, cp, mv and flock on PATH;
+node, npm, pnpm and corepack NOT on PATH; Node candidates exist at
+`/opt/alt/alt-nodejs<version>/root/usr/bin/node` for versions 6 through 24
+(v24.22.3 newest); PHP CLI 8.4.27 at /usr/local/bin/php; /usr/bin/php is
+PHP-CGI and must not be invoked with CLI commands. A build step must call
+these binaries by absolute path or extend PATH explicitly.
+Standard
 GitHub-clone pull deployment requires Update from Remote, then Deploy HEAD Commit.
 Automatic cPanel deployment listens to pushes to the cPanel-managed repository,
 not GitHub alone. Verify build tools and a secure automation path before enabling
 push-to-live. Do not install an unverified plugin or public unauthenticated hook.
+
+The owner confirmed on 14 November 2026 that GitHub is the source for
+deployments to the Afrihost web hosting server going forward: master on
+github.com/ericnangomba/ntsonkothass feeds the cPanel Git Version Control
+clone, deployed via Update from Remote then Deploy HEAD Commit. This is a
+route preference, not permission to publish on every push; a push goes live
+only when the owner approves that deployment. The owner also asked for a
+future step-by-step walkthrough of this route (explicitly not on 14 Nov):
+the reproducible lesson is 1) commit to master on GitHub with [skip netlify],
+2) sign into ClientZone with GitHub, 3) open cPanel > Git Version Control >
+Pull or Deploy, 4) Update from Remote, 5) verify the HEAD SHA matches the
+GitHub commit, 6) Deploy HEAD Commit, 7) read the deploy log under
+~/.cpanel/logs/ to confirm exit 0.
 
 The owner confirmed that a parent, guardian or authorised adult must submit on the
 learner's behalf. The form requires that declaration on frontend and backend; it
