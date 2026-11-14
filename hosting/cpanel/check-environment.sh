@@ -1,11 +1,13 @@
 #!/bin/bash
 # Staging only: inspect build tools. Never copy files to the live document root.
-set -eu
+# No single probe may abort the run: Afrihost confirmed the previous version died
+# because /usr/local/bin/php is PHP-CGI, not CLI, and the unguarded probe exited 255.
+set -u
 umask 077
-root=$(git rev-parse --show-toplevel)
-cd "$root"
+root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+cd "$root" || exit 1
 report="$HOME/school-deploy-environment.txt"
-tmp=$(mktemp "$HOME/.school-deploy-environment.XXXXXX")
+tmp=$(mktemp "$HOME/.school-deploy-environment.XXXXXX") || exit 1
 trap 'rm -f "$tmp"' EXIT
 {
   printf '%s\n' 'School Git deployment environment check: staging only'
@@ -16,10 +18,16 @@ trap 'rm -f "$tmp"' EXIT
     command -v "$tool" || true
   done
   for node in /opt/alt/alt-nodejs*/root/usr/bin/node /usr/bin/node /usr/local/bin/node; do
-    if [ -x "$node" ]; then printf 'node-candidate=%s ' "$node"; "$node" --version; fi
+    if [ -x "$node" ]; then printf 'node-candidate=%s ' "$node"; "$node" --version 2>&1 || true; fi
   done
   for php in /usr/local/bin/php /usr/bin/php; do
-    if [ -x "$php" ]; then "$php" -r 'echo "php-version=", PHP_VERSION, PHP_EOL;'; fi
+    if [ -x "$php" ]; then
+      if "$php" -v 2>/dev/null | grep -qi '(cli)'; then
+        "$php" -r 'echo "php-cli-version=", PHP_VERSION, PHP_EOL;' 2>/dev/null || printf 'php-cli-probe-failed=%s\n' "$php"
+      else
+        printf 'php-candidate=%s not-cli-skipped\n' "$php"
+      fi
+    fi
   done
   printf '%s\n' 'No dependency install, mail, public files, secrets, hooks or SSH keys were changed.'
 } > "$tmp" 2>&1
