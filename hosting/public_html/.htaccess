@@ -1,3 +1,4 @@
+
 # BEGIN cPanel-generated php ini directives, do not edit
 # Manual editing of this file may result in unexpected behavior.
 # To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
@@ -16,10 +17,14 @@
 # This domain inherits the “PHP” package.
 # php -- END cPanel-generated handler, do not edit
 
-# SPA fallback for client-side routes (added 2026-11-17). Real files and
-# directories (assets, .well-known, cgi-bin, api) are served directly.
+# SPA fallback for client-side routes (added 2026-11-17). /api and URLs that
+# name a file keep their real server status (404 when missing); real files and
+# directories (assets, .well-known, cgi-bin) are served directly.
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule ^api/ - [L]
+RewriteCond %{REQUEST_URI} \.[a-zA-Z0-9]{1,8}$
+RewriteRule ^ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /index.html [L]
