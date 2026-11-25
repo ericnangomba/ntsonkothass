@@ -70,6 +70,14 @@ cp "$root/hosting/public_html/.htaccess" "$HOME/public_html/.htaccess" || fail '
 # --- Form handler: public endpoint + private code -----------------------
 mkdir -p "$HOME/public_html/api" || fail 'mkdir api'
 cp "$root/hosting/php/public/api/forms.php" "$HOME/public_html/api/forms.php" || fail 'copy api forms.php'
+
+# --- Public perms: the web server must be able to read the served tree ---
+# This script runs under umask 077 so backups, logs and private config stay
+# owner-only, but that leaves published files 600/700, which LiteSpeed
+# cannot read (it then serves an autoindex or 404). Normalise only the
+# public docroot; skip the system-managed .well-known directory.
+find "$HOME/public_html" -path "$HOME/public_html/.well-known" -prune -o -type d -exec chmod 755 {} + || fail 'chmod public dirs'
+find "$HOME/public_html" -path "$HOME/public_html/.well-known" -prune -o -type f -exec chmod 644 {} + || fail 'chmod public files'
 mkdir -p "$HOME/school-forms" || fail 'mkdir school-forms'
 cp -n "$root/hosting/php/private/forms.php" "$HOME/school-forms/forms.php" || fail 'copy private forms.php'
 if [ ! -f "$HOME/school-forms/config.php" ]; then
