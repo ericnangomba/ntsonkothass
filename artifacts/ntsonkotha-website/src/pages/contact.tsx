@@ -1,5 +1,6 @@
 import { submitApplication } from "@/lib/application-delivery";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -35,10 +36,37 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
-const enquiriesEnabled = !!import.meta.env.VITE_APPLICATION_ENDPOINT;
+const enquiryEndpoint = import.meta.env.VITE_APPLICATION_ENDPOINT || "";
 
 export default function Contact() {
   const { toast } = useToast();
+
+  // Delivery availability is checked live: the form stays visibly disabled
+  // until the endpoint confirms it can accept enquiries (GET returns a
+  // session token). No endpoint configured (static preview) or any refusal
+  // (503 while the school keeps delivery off) shows the upfront notice.
+  const [delivery, setDelivery] = useState<"checking" | "enabled" | "disabled">(enquiryEndpoint ? "checking" : "disabled");
+  useEffect(() => {
+    if (!enquiryEndpoint) {
+      setDelivery("disabled");
+      return;
+    }
+    let cancelled = false;
+    fetch(enquiryEndpoint, { credentials: "same-origin", headers: { Accept: "application/json" } })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("unavailable");
+        const data = await res.json();
+        if (!data || typeof data.token !== "string") throw new Error("unavailable");
+        if (!cancelled) setDelivery("enabled");
+      })
+      .catch(() => {
+        if (!cancelled) setDelivery("disabled");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const enquiriesEnabled = delivery === "enabled";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -265,7 +293,7 @@ export default function Contact() {
                   />
 
                   <Button disabled={!enquiriesEnabled || form.formState.isSubmitting} type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest h-14">
-                    {!enquiriesEnabled ? "Online Messages Disabled" : form.formState.isSubmitting ? "Sending..." : "Send Message"}
+                    {delivery === "checking" ? "Checking Availability..." : !enquiriesEnabled ? "Online Messages Disabled" : form.formState.isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </fieldset>
                 </form>
