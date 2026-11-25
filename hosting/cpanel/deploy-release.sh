@@ -48,8 +48,12 @@ app="$root/artifacts/ntsonkotha-website"
 cd "$app" || exit 1
 # Intake gate stays OFF: VITE_APPLICATIONS_ENABLED is never set here.
 # Contact/application delivery endpoint is the same-origin PHP handler.
-corepack pnpm install --frozen-lockfile || fail 'pnpm install'
-VITE_APPLICATION_ENDPOINT=/api/forms.php corepack pnpm build || fail 'pnpm build'
+# taskset caps the CPU count pnpm sees: with the full 128 CPUs visible in this
+# cage, pnpm's worker pool overspawns and dies with ERR_WORKER_INIT_FAILED
+# EAGAIN (measured 25 Nov). 4 CPUs is plenty for this build.
+if command -v taskset >/dev/null 2>&1; then TASKSET='taskset -c 0-3'; else TASKSET=''; fi
+$TASKSET corepack pnpm install --frozen-lockfile || fail 'pnpm install'
+VITE_APPLICATION_ENDPOINT=/api/forms.php $TASKSET corepack pnpm build || fail 'pnpm build'
 [ -f "$app/dist/index.html" ] || fail 'dist/index.html missing after build'
 
 # --- Backup (outside served root) ---------------------------------------
