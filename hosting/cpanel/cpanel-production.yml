@@ -1,0 +1,9 @@
+---
+# PRODUCTION deploy task, staged for the owner-approved release.
+# ACTIVATION: this file becomes the repo-root .cpanel.yml (replacing the
+# staging-only one) only as part of the approved release. Until then the
+# root .cpanel.yml keeps running the read-only staging check and a cPanel
+# "Deploy HEAD Commit" publishes nothing.
+deployment:
+  tasks:
+    - /bin/bash hosting/cpanel/deploy-release.sh
