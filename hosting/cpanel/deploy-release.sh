@@ -31,13 +31,16 @@ printf 'commit='; git rev-parse HEAD || fail 'git rev-parse'
 
 # --- Build tools: alt-nodejs, absolute paths (measured 14 Nov) -----------
 bindir=''
-for dir in /opt/alt/alt-nodejs*/root/usr/bin; do
-  [ -x "$dir/node" ] && bindir="$dir"
+for v in 24 22 20 18 16 14; do
+  cand="/opt/alt/alt-nodejs$v/root/usr/bin"
+  if [ -x "$cand/node" ] && "$cand/corepack" --version >/dev/null 2>&1; then
+    bindir="$cand"
+    break
+  fi
 done
-[ -n "$bindir" ] || fail 'no alt-nodejs node binary found'
+[ -n "$bindir" ] || fail 'no alt-nodejs with corepack found'
 export PATH="$bindir:$PATH"
 printf 'node=%s\n' "$(node --version 2>&1)"
-corepack --version >/dev/null 2>&1 || fail 'corepack missing under alt-nodejs'
 
 # --- Build ---------------------------------------------------------------
 app="$root/artifacts/ntsonkotha-website"
