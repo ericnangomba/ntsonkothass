@@ -35,6 +35,8 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
+const applicationsEnabled = import.meta.env.VITE_APPLICATIONS_ENABLED === "true";
+
 export default function Contact() {
   const { toast } = useToast();
 
@@ -50,6 +52,7 @@ export default function Contact() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!applicationsEnabled) return;
     try {
       await submitApplication({
         endpoint: import.meta.env.VITE_APPLICATION_ENDPOINT || "",
@@ -168,7 +171,13 @@ export default function Contact() {
               <h2 className="text-3xl font-serif font-bold text-white mb-8">Send an Enquiry</h2>
               
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {!applicationsEnabled && (
+                <div role="status" className="mb-6 rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
+                  Online enquiries are not accepting submissions. Please do not enter personal details. The school is completing its message handling arrangements and secure delivery checks before launch. Contact the administrator by phone or email for enquiries.
+                </div>
+              )}
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <fieldset disabled={!applicationsEnabled} className="min-w-0 w-full space-y-6">
                   <FormField
                     control={form.control}
                     name="fullName"
@@ -255,9 +264,10 @@ export default function Contact() {
                     )}
                   />
 
-                  <Button disabled={form.formState.isSubmitting} type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest h-14">
-                    Send Message
+                  <Button disabled={!applicationsEnabled || form.formState.isSubmitting} type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest h-14">
+                    {!applicationsEnabled ? "Online Messages Disabled" : form.formState.isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
+                </fieldset>
                 </form>
               </Form>
             </div>
